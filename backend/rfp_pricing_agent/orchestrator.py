@@ -170,46 +170,52 @@ async def run_pricing_agent(
         stdio_client(SERVERS["gst"])       as (r3, w3),
         stdio_client(SERVERS["currency"])  as (r4, w4),
     ):
-        sessions = {
-            "materials": ClientSession(r1, w1),
-            "labor":     ClientSession(r2, w2),
-            "gst":       ClientSession(r3, w3),
-            "currency":  ClientSession(r4, w4),
-        }
-
-        # Initialize all sessions with logging and timeout
-        logger.info("Initializing all MCP servers...")
-        async def init_with_timeout(name, session):
-            logger.info(f"[{name}] Starting initialization...")
-            try:
-                await asyncio.wait_for(session.initialize(), timeout=15.0)
-                logger.info(f"[{name}] Initialization complete.")
-            except TimeoutError:
-                logger.error(f"[{name}] Initialization TIMED OUT after 15 seconds.")
-            except Exception as e:
-                logger.error(f"[{name}] Initialization ERROR: {e}")
-        
-        await asyncio.gather(*[init_with_timeout(name, s) for name, s in sessions.items()])
-        logger.info("All servers ready (or timed out).")
-
-        # Collect all tools
-        all_tools = await collect_all_tools(sessions)
-
-        # Format tools for OpenAI API
-        openai_tools = [
-            {
-                "type": "function",
-                "function": {
-                    "name": t["name"],
-                    "description": t["description"],
-                    "parameters": t["input_schema"],
-                }
+        async with (
+            ClientSession(r1, w1) as s1,
+            ClientSession(r2, w2) as s2,
+            ClientSession(r3, w3) as s3,
+            ClientSession(r4, w4) as s4,
+        ):
+            sessions = {
+                "materials": s1,
+                "labor":     s2,
+                "gst":       s3,
+                "currency":  s4,
             }
-            for t in all_tools
-        ]
 
-        # Build the user message
-        user_message = f"""
+            # Initialize all sessions with logging and timeout
+            logger.info("Initializing all MCP servers...")
+            async def init_with_timeout(name, session):
+                logger.info(f"[{name}] Starting initialization...")
+                try:
+                    await asyncio.wait_for(session.initialize(), timeout=15.0)
+                    logger.info(f"[{name}] Initialization complete.")
+                except TimeoutError:
+                    logger.error(f"[{name}] Initialization TIMED OUT after 15 seconds.")
+                except Exception as e:
+                    logger.error(f"[{name}] Initialization ERROR: {e}")
+            
+            await asyncio.gather(*[init_with_timeout(name, s) for name, s in sessions.items()])
+            logger.info("All servers ready (or timed out).")
+
+            # Collect all tools
+            all_tools = await collect_all_tools(sessions)
+
+            # Format tools for OpenAI API
+            openai_tools = [
+                {
+                    "type": "function",
+                    "function": {
+                        "name": t["name"],
+                        "description": t["description"],
+                        "parameters": t["input_schema"],
+                    }
+                }
+                for t in all_tools
+            ]
+
+            # Build the user message
+            user_message = f"""
 Provide a complete cost breakdown for this construction/interior project:
 
 PROJECT DETAILS:
@@ -235,65 +241,65 @@ REQUIRED ANALYSIS:
 Call tools in PARALLEL. Return structured JSON.
 """
 
-        messages = [{"role": "user", "content": user_message}]
-        final_result = {}
-        iteration = 0
-        max_iterations = 10
+            messages = [{"role": "user", "content": user_message}]
+            final_result = {}
+            iteration = 0
+            max_iterations = 5
 
-        # ── Agentic loop ──────────────────────────────────────────────────────
-        while iteration < max_iterations:
-            iteration += 1
-            logger.info(f"Agent iteration {iteration}")
+            # ── Agentic loop ──────────────────────────────────────────────────────
+            while iteration < max_iterations:
+                iteration += 1
+                logger.info(f"Agent iteration {iteration}")
 
-            response = client.chat.completions.create(
-                model="anthropic/claude-3.5-sonnet",
-                messages=[{"role": "system", "content": SYSTEM_PROMPT}] + messages,
-                tools=openai_tools,
-            )
+                response = client.chat.completions.create(
+                    model="openai/gpt-4o-mini",
+                    messages=[{"role": "system", "content": SYSTEM_PROMPT}] + messages,
+                    tools=openai_tools,
+                )
 
-            choice = response.choices[0]
-            logger.info(f"Stop reason: {choice.finish_reason}")
+                choice = response.choices[0]
+                logger.info(f"Stop reason: {choice.finish_reason}")
 
-            if choice.finish_reason == "stop" or choice.finish_reason == "length" or not choice.message.tool_calls:
-                text = choice.message.content or ""
-                text = text.strip()
-                # Try to parse as JSON
-                try:
-                    # Find JSON block if wrapped in markdown
-                    if "```json" in text:
-                        start = text.find("```json") + 7
-                        end = text.find("```", start)
-                        text = text[start:end].strip()
-                    elif "```" in text:
-                        start = text.find("```") + 3
-                        end = text.find("```", start)
-                        text = text[start:end].strip()
-                    final_result = json.loads(text)
-                except json.JSONDecodeError:
-                    final_result = {"raw_response": text}
-                break
+                if choice.finish_reason == "stop" or choice.finish_reason == "length" or not choice.message.tool_calls:
+                    text = choice.message.content or ""
+                    text = text.strip()
+                    # Try to parse as JSON
+                    try:
+                        # Find JSON block if wrapped in markdown
+                        if "```json" in text:
+                            start = text.find("```json") + 7
+                            end = text.find("```", start)
+                            text = text[start:end].strip()
+                        elif "```" in text:
+                            start = text.find("```") + 3
+                            end = text.find("```", start)
+                            text = text[start:end].strip()
+                        final_result = json.loads(text)
+                    except json.JSONDecodeError:
+                        final_result = {"raw_response": text}
+                    break
 
-            if choice.message.tool_calls:
-                tool_calls = choice.message.tool_calls
+                if choice.message.tool_calls:
+                    tool_calls = choice.message.tool_calls
 
-                logger.info(f"Calling {len(tool_calls)} tools in parallel:")
-                for tc in tool_calls:
-                    logger.info(f"  → {tc.function.name}")
+                    logger.info(f"Calling {len(tool_calls)} tools in parallel:")
+                    for tc in tool_calls:
+                        logger.info(f"  → {tc.function.name}")
 
-                # Execute ALL tool calls simultaneously
-                results = await call_tool_parallel(sessions, tool_calls)
+                    # Execute ALL tool calls simultaneously
+                    results = await call_tool_parallel(sessions, tool_calls)
 
-                # Add assistant response and tool results to messages
-                messages.append(choice.message.model_dump(exclude_unset=True))
+                    # Add assistant response and tool results to messages
+                    messages.append(choice.message.model_dump(exclude_unset=True))
 
-                for tool_id, result_text in results:
-                    messages.append({
-                        "role": "tool",
-                        "tool_call_id": tool_id,
-                        "content": result_text,
-                    })
+                    for tool_id, result_text in results:
+                        messages.append({
+                            "role": "tool",
+                            "tool_call_id": tool_id,
+                            "content": result_text,
+                        })
 
-        return final_result
+            return final_result
 
 
 # ── CLI entry point ───────────────────────────────────────────────────────────
