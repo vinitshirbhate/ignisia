@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI_Validate — Proposal Intelligence Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #18181f;
+    --border: #2a2a38;
+    --accent: #e8ff47;
+    --accent2: #47ffe8;
+    --red: #ff4757;
+    --orange: #ff9f43;
+    --yellow: #ffd32a;
+    --green: #0be881;
+    --blue: #00d2ff;
+    --purple: #a29bfe;
+    --text: #f0f0ff;
+    --muted: #6c6c8a;
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232,255,71,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,255,71,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header {
+    padding: 32px 0 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-icon {
+    width: 42px; height: 42px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+
+  .logo-text h1 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+
+  .logo-text span {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .status-badge {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 64px 0 48px;
+    text-align: center;
+  }
+
+  .hero h2 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 16px;
+  }
+
+  .hero h2 em {
+    font-style: normal;
+    color: var(--accent);
+    position: relative;
+  }
+
+  .hero h2 em::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    opacity: 0.4;
+  }
+
+  .hero p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto 40px;
+  }
+
+  /* ── UPLOAD ZONE ── */
+  .upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+    padding: 52px 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    background: var(--surface);
+    margin-bottom: 32px;
+  }
+
+  .upload-zone:hover, .upload-zone.drag-over {
+    border-color: var(--accent);
+    background: rgba(232,255,71,0.04);
+  }
+
+  .upload-zone input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer;
+  }
+
+  .upload-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .upload-zone h3 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .upload-zone p { color: var(--muted); font-size: 13px; }
+
+  .upload-zone .file-name {
+    margin-top: 16px;
+    padding: 10px 20px;
+    background: rgba(232,255,71,0.1);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    color: var(--accent);
+    font-size: 13px;
+    display: inline-block;
+  }
+
+  /* ── ANALYZE BUTTON ── */
+  .btn-analyze {
+    width: 100%;
+    padding: 18px;
+    background: var(--accent);
+    color: #0a0a0f;
+    border: none;
+    border-radius: 12px;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+
+  .btn-analyze:hover:not(:disabled) {
+    background: #f5ff6b;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 32px rgba(232,255,71,0.3);
+  }
+
+  .btn-analyze:disabled {
+    opacity: 0.5; cursor: not-allowed;
+  }
+
+  /* ── LOADING ── */
+  .loading {
+    display: none;
+    text-align: center;
+    padding: 64px 0;
+  }
+
+  .loading.active { display: block; }
+
+  .loader-ring {
+    width: 64px; height: 64px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    margin: 0 auto 24px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .loading-step {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 16px;
+    background: var(--surface);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    transition: all 0.3s ease;
+  }
+
+  .loading-step.active {
+    color: var(--accent);
+    border: 1px solid rgba(232,255,71,0.3);
+    background: rgba(232,255,71,0.05);
+  }
+
+  .step-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--muted);
+    flex-shrink: 0;
+  }
+
+  .loading-step.active .step-dot {
+    background: var(--accent);
+    animation: pulse 1s infinite;
+  }
+
+  /* ── RESULTS ── */
+  .results { display: none; }
+  .results.active { display: block; }
+
+  /* Score Header */
+  .score-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 32px;
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+
+  .score-circle {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border: 3px solid;
+    position: relative;
+  }
+
+  .score-circle .score-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .score-circle .score-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .doc-meta h2 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .doc-meta p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .risk-badge {
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: var(--font-display);
+    border: 1px solid;
+    white-space: nowrap;
+  }
+
+  /* Stats Bar */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+  }
+
+  .stat-card .stat-value {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-card .stat-label {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Issue Cards */
+  .issues-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .issue-card {
+    background: var(--surface);
+    border-radius: 12px;
+    border-left: 4px solid;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .issue-card:hover { transform: translateX(3px); }
+
+  .issue-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+  }
+
+  .severity-tag {
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .issue-title-block { flex: 1; }
+
+  .issue-title {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .issue-meta {
+    font-size: 11px;
+    color: var(--muted);
+    display: flex; gap: 12px;
+  }
+
+  .issue-meta span {
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  .issue-body {
+    display: none;
+    padding: 0 20px 20px 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .issue-body.open { display: block; }
+
+  .issue-section {
+    margin-top: 14px;
+  }
+
+  .issue-section-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .issue-section-content {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #d0d0e8;
+  }
+
+  .evidence-block {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12px;
+    color: var(--accent2);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .recommendation-block {
+    background: rgba(11,232,129,0.07);
+    border: 1px solid rgba(11,232,129,0.2);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--green);
+    line-height: 1.5;
+  }
+
+  /* Calc Table */
+  .calc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  .calc-table th {
+    text-align: left;
+    padding: 10px 14px;
+    background: var(--bg);
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .calc-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(42,42,56,0.5);
+    vertical-align: top;
+  }
+
+  .calc-table tr:last-child td { border-bottom: none; }
+
+  .status-correct { color: var(--green); }
+  .status-incorrect { color: var(--red); }
+  .status-unverifiable { color: var(--muted); }
+
+  /* Strengths / Missing */
+  .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .tag {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .tag-green {
+    background: rgba(11,232,129,0.1);
+    border: 1px solid rgba(11,232,129,0.25);
+    color: var(--green);
+  }
+
+  .tag-red {
+    background: rgba(255,71,87,0.1);
+    border: 1px solid rgba(255,71,87,0.25);
+    color: var(--red);
+  }
+
+  /* Pricing */
+  .pricing-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .pricing-total {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .pricing-concerns { display: flex; flex-direction: column; gap: 8px; }
+
+  .pricing-concern {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 13px;
+    color: #d0d0e8;
+    line-height: 1.5;
+  }
+
+  .pricing-concern::before {
+    content: '⚠';
+    color: var(--orange);
+    flex-shrink: 0;
+  }
+
+  /* Retry Button */
+  .btn-retry {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 32px auto 0;
+  }
+
+  .btn-retry:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Error */
+  .error-box {
+    background: rgba(255,71,87,0.08);
+    border: 1px solid rgba(255,71,87,0.3);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    display: none;
+  }
+
+  .error-box.active { display: block; }
+  .error-box h3 { color: var(--red); margin-bottom: 8px; font-family: var(--font-display); }
+  .error-box p { color: var(--muted); font-size: 13px; }
+
+  /* Severity / Risk colors */
+  .sev-critical { border-color: #ff1744; }
+  .sev-high     { border-color: var(--red); }
+  .sev-medium   { border-color: var(--orange); }
+  .sev-low      { border-color: var(--yellow); }
+  .sev-info     { border-color: var(--blue); }
+
+  .tag-critical { background: rgba(255,23,68,0.15); color: #ff1744; }
+  .tag-high     { background: rgba(255,71,87,0.15); color: var(--red); }
+  .tag-medium   { background: rgba(255,159,67,0.15); color: var(--orange); }
+  .tag-low      { background: rgba(255,211,42,0.12); color: var(--yellow); }
+  .tag-info     { background: rgba(0,210,255,0.1); color: var(--blue); }
+
+  .score-critical { border-color: #ff1744; color: #ff1744; }
+  .score-high     { border-color: var(--red); color: var(--red); }
+  .score-medium   { border-color: var(--orange); color: var(--orange); }
+  .score-low      { border-color: var(--yellow); color: var(--yellow); }
+  .score-good     { border-color: var(--green); color: var(--green); }
+
+  .risk-critical { background: rgba(255,23,68,0.1); border-color: #ff1744; color: #ff1744; }
+  .risk-high     { background: rgba(255,71,87,0.1); border-color: var(--red); color: var(--red); }
+  .risk-medium   { background: rgba(255,159,67,0.1); border-color: var(--orange); color: var(--orange); }
+  .risk-low      { background: rgba(11,232,129,0.1); border-color: var(--green); color: var(--green); }
+
+  @media (max-width: 640px) {
+    .score-header { grid-template-columns: 1fr; text-align: center; }
+    .risk-badge { margin: 0 auto; }
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 1px;
+    border-top: 1px solid var(--border);
+    margin-top: 64px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo">
+      <div class="logo-icon">🔬</div>
+      <div class="logo-text">
+        <h1>AI_Validate</h1>
+        <span>Proposal Intelligence Engine</span>
+      </div>
+    </div>
+    <div class="status-badge">
+      <div class="status-dot"></div>
+      System Online
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h2>Catch Every <em>Mistake</em><br>Before It Costs You</h2>
+    <p>Deep AI-powered validation of your proposals — calculation errors, pricing inconsistencies, logic flaws, and risky decisions flagged with evidence and fixes.</p>
+  </div>
+
+  <!-- UPLOAD -->
+  <div id="upload-section">
+    <div class="upload-zone" id="drop-zone">
+      <input type="file" id="file-input" accept=".pdf" />
+      <span class="upload-icon">📄</span>
+      <h3>Drop your proposal PDF here</h3>
+      <p>or click to browse · PDF files only</p>
+      <div class="file-name" id="file-name-display" style="display:none"></div>
+    </div>
+    <button class="btn-analyze" id="analyze-btn" disabled onclick="runAnalysis()">
+      <span>🔬</span> Validate Proposal
+    </button>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loading">
+    <div class="loader-ring"></div>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:24px;">Analyzing your document…</p>
+    <div class="loading-steps">
+      <div class="loading-step active" id="step-1">
+        <div class="step-dot"></div> Extracting text and structure
+      </div>
+      <div class="loading-step" id="step-2">
+        <div class="step-dot"></div> Parsing numbers and calculations
+      </div>
+      <div class="loading-step" id="step-3">
+        <div class="step-dot"></div> Running validation agent
+      </div>
+      <div class="loading-step" id="step-4">
+        <div class="step-dot"></div> Generating findings report
+      </div>
+    </div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="error-box" id="error-box">
+    <h3>⚠ Validation Failed</h3>
+    <p id="error-msg"></p>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results"></div>
+
+  <!-- RETRY -->
+  <div id="retry-area" style="display:none;text-align:center">
+    <button class="btn-retry" onclick="resetUI()">↺ Validate Another Document</button>
+  </div>
+
+  <footer>AI_VALIDATE v2.0 &nbsp;·&nbsp; Proposal Intelligence Engine &nbsp;·&nbsp; Powered by RAG + Multi-Pass LLM</footer>
+</div>
+
+<script>
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('file-input');
+const analyzeBtn = document.getElementById('analyze-btn');
+const fileNameDisplay = document.getElementById('file-name-display');
+let selectedFile = null;
+
+// Drag & Drop
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('drag-over');
+  const f = e.dataTransfer.files[0];
+  if (f && f.name.endsWith('.pdf')) setFile(f);
+});
+fileInput.addEventListener('change', () => { if (fileInput.files[0]) setFile(fileInput.files[0]); });
+
+function setFile(f) {
+  selectedFile = f;
+  fileNameDisplay.textContent = '📄 ' + f.name + ' (' + (f.size / 1024).toFixed(0) + ' KB)';
+  fileNameDisplay.style.display = 'inline-block';
+  analyzeBtn.disabled = false;
+}
+
+// Loading step animation
+let stepTimer;
+function startLoadingAnimation() {
+  const steps = ['step-1','step-2','step-3','step-4'];
+  let i = 0;
+  steps.forEach(id => document.getElementById(id).classList.remove('active'));
+  document.getElementById(steps[0]).classList.add('active');
+  stepTimer = setInterval(() => {
+    i = (i + 1) % steps.length;
+    steps.forEach(id => document.getElementById(id).classList.remove('active'));
+    document.getElementById(steps[i]).classList.add('active');
+  }, 2800);
+}
+
+function stopLoadingAnimation() { clearInterval(stepTimer); }
+
+async function runAnalysis() {
+  if (!selectedFile) return;
+
+  document.getElementById('upload-section').style.display = 'none';
+  document.getElementById('loading').classList.add('active');
+  document.getElementById('error-box').classList.remove('active');
+  document.getElementById('results').classList.remove('active');
+  document.getElementById('results').innerHTML = '';
+  document.getElementById('retry-area').style.display = 'none';
+
+  startLoadingAnimation();
+
+  const formData = new FormData();
+  formData.append('file', selectedFile);
+
+  try {
+    const res = await fetch('/validate', { method: 'POST', body: formData });
+    const data = await res.json();
+
+    stopLoadingAnimation();
+    document.getElementById('loading').classList.remove('active');
+
+    if (!res.ok) {
+      showError(data.detail || 'Unknown error from server');
+      return;
+    }
+
+    renderResults(data);
+    document.getElementById('retry-area').style.display = 'block';
+
+  } catch (err) {
+    stopLoadingAnimation();
+    document.getElementById('loading').classList.remove('active');
+    showError('Network error: ' + err.message);
+  }
+}
+
+function showError(msg) {
+  document.getElementById('error-msg').textContent = msg;
+  document.getElementById('error-box').classList.add('active');
+  document.getElementById('retry-area').style.display = 'block';
+}
+
+function resetUI() {
+  selectedFile = null;
+  fileInput.value = '';
+  fileNameDisplay.style.display = 'none';
+  analyzeBtn.disabled = true;
+  document.getElementById('upload-section').style.display = 'block';
+  document.getElementById('results').classList.remove('active');
+  document.getElementById('results').innerHTML = '';
+  document.getElementById('error-box').classList.remove('active');
+  document.getElementById('retry-area').style.display = 'none';
+}
+
+function scoreClass(score) {
+  if (score >= 80) return 'score-good';
+  if (score >= 60) return 'score-low';
+  if (score >= 40) return 'score-medium';
+  if (score >= 20) return 'score-high';
+  return 'score-critical';
+}
+
+function riskClass(level) {
+  return 'risk-' + (level || 'medium').toLowerCase();
+}
+
+function sevClass(sev) {
+  return 'sev-' + (sev || 'info').toLowerCase();
+}
+
+function tagClass(sev) {
+  return 'tag-' + (sev || 'info').toLowerCase();
+}
+
+function catIcon(cat) {
+  const icons = { CALCULATION:'🧮', PRICING:'💰', LOGIC:'🔀', COMPLETENESS:'📋',
+                  INCONSISTENCY:'⚠', RISK:'🚨', MISSING:'❓' };
+  return icons[cat] || '📌';
+}
+
+function renderResults(d) {
+  const score = d.overall_score ?? 0;
+  const risk = d.risk_level ?? 'MEDIUM';
+  const issues = d.issues ?? [];
+  const strengths = d.strengths ?? [];
+  const missing = d.missing_sections ?? [];
+  const calcs = d.calculation_verification ?? [];
+  const pricing = d.pricing_analysis ?? {};
+  const facts = d.extracted_facts ?? {};
+
+  // Count by severity
+  const critCount = issues.filter(i => i.severity === 'CRITICAL').length;
+  const highCount = issues.filter(i => i.severity === 'HIGH').length;
+
+  let html = '';
+
+  // Score Header
+  html += `
+  <div class="score-header">
+    <div class="score-circle ${scoreClass(score)}">
+      <span class="score-num">${score}</span>
+      <span class="score-label">Score</span>
+    </div>
+    <div class="doc-meta">
+      <h2>${escHtml(d.document_name ?? 'Proposal')}</h2>
+      <p>${escHtml(d.executive_summary ?? '')}</p>
+    </div>
+    <div class="risk-badge ${riskClass(risk)}">⬥ ${risk} RISK</div>
+  </div>`;
+
+  // Stats
+  html += `<div class="stats-bar">
+    <div class="stat-card"><div class="stat-value" style="color:var(--red)">${critCount + highCount}</div><div class="stat-label">Critical Issues</div></div>
+    <div class="stat-card"><div class="stat-value">${issues.length}</div><div class="stat-label">Total Findings</div></div>
+    <div class="stat-card"><div class="stat-value" style="color:var(--blue)">${facts.calculations_found ?? 0}</div><div class="stat-label">Calculations</div></div>
+    <div class="stat-card"><div class="stat-value" style="color:var(--purple)">${facts.deliverables_found ?? 0}</div><div class="stat-label">Deliverables</div></div>
+    <div class="stat-card"><div class="stat-value" style="color:var(--accent2)">${d.page_count ?? 0}</div><div class="stat-label">Pages</div></div>
+  </div>`;
+
+  // Issues
+  if (issues.length > 0) {
+    html += `<div class="section">
+    <div class="section-title">Validation Findings</div>
+    <div class="issues-list">`;
+    issues.forEach((issue, idx) => {
+      const sev = (issue.severity || 'INFO').toUpperCase();
+      html += `
+      <div class="issue-card ${sevClass(sev)}" id="issue-${idx}">
+        <div class="issue-header" onclick="toggleIssue(${idx})">
+          <span class="severity-tag ${tagClass(sev)}">${sev}</span>
+          <div class="issue-title-block">
+            <div class="issue-title">${catIcon(issue.category)} ${escHtml(issue.title ?? '')}</div>
+            <div class="issue-meta">
+              <span>📂 ${issue.category ?? ''}</span>
+              <span>🎯 ${issue.intent ?? issue.category ?? ''}</span>
+              <span style="color:var(--muted)">Click to expand</span>
+            </div>
+          </div>
+        </div>
+        <div class="issue-body" id="body-${idx}">
+          <div class="issue-section">
+            <div class="issue-section-label">Description</div>
+            <div class="issue-section-content">${escHtml(issue.description ?? '')}</div>
+          </div>
+          ${issue.evidence ? `<div class="issue-section">
+            <div class="issue-section-label">Evidence from Document</div>
+            <div class="evidence-block">"${escHtml(issue.evidence)}"</div>
+          </div>` : ''}
+          ${issue.recommendation ? `<div class="issue-section">
+            <div class="issue-section-label">Recommended Fix</div>
+            <div class="recommendation-block">✓ ${escHtml(issue.recommendation)}</div>
+          </div>` : ''}
+          ${issue.impact ? `<div class="issue-section">
+            <div class="issue-section-label">Impact if Unresolved</div>
+            <div class="issue-section-content" style="color:var(--orange)">${escHtml(issue.impact)}</div>
+          </div>` : ''}
+        </div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Calculation Verification
+  if (calcs.length > 0) {
+    html += `<div class="section">
+    <div class="section-title">Calculation Verification</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden">
+    <table class="calc-table">
+      <thead><tr><th>Expression</th><th>Claimed</th><th>Verified</th><th>Status</th></tr></thead>
+      <tbody>`;
+    calcs.forEach(c => {
+      const cls = c.status === 'CORRECT' ? 'status-correct' : c.status === 'INCORRECT' ? 'status-incorrect' : 'status-unverifiable';
+      const icon = c.status === 'CORRECT' ? '✓' : c.status === 'INCORRECT' ? '✗' : '?';
+      html += `<tr>
+        <td>${escHtml(c.expression ?? '')}</td>
+        <td style="color:var(--text)">${escHtml(c.claimed ?? '')}</td>
+        <td style="color:var(--accent2)">${escHtml(c.verified ?? '')}</td>
+        <td class="${cls}">${icon} ${c.status}</td>
+      </tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+
+  // Pricing Analysis
+  if (pricing && (pricing.total_found || pricing.concerns?.length)) {
+    html += `<div class="section">
+    <div class="section-title">Pricing Analysis</div>
+    <div class="pricing-box">
+      ${pricing.total_found ? `<div class="pricing-total">$${Number(pricing.total_found).toLocaleString()}<span style="font-size:16px;color:var(--muted)"> ${pricing.currency || 'USD'}</span></div>` : '<div class="pricing-total" style="color:var(--muted)">No total found</div>'}
+      ${pricing.concerns?.length ? `<div class="pricing-concerns">${pricing.concerns.map(c => `<div class="pricing-concern">${escHtml(c)}</div>`).join('')}</div>` : ''}
+      ${pricing.missing_costs?.length ? `<div style="margin-top:16px;"><div class="issue-section-label" style="margin-bottom:8px">Likely Missing Costs</div>${pricing.missing_costs.map(c => `<div class="pricing-concern" style="color:var(--red)">${escHtml(c)}</div>`).join('')}</div>` : ''}
+    </div></div>`;
+  }
+
+  // Strengths
+  if (strengths.length) {
+    html += `<div class="section">
+    <div class="section-title">Strengths</div>
+    <div class="tag-list">${strengths.map(s => `<div class="tag tag-green">✓ ${escHtml(s)}</div>`).join('')}</div>
+    </div>`;
+  }
+
+  // Missing Sections
+  if (missing.length) {
+    html += `<div class="section">
+    <div class="section-title">Missing Sections</div>
+    <div class="tag-list">${missing.map(m => `<div class="tag tag-red">✗ ${escHtml(m)}</div>`).join('')}</div>
+    </div>`;
+  }
+
+  document.getElementById('results').innerHTML = html;
+  document.getElementById('results').classList.add('active');
+}
+
+function toggleIssue(idx) {
+  const body = document.getElementById('body-' + idx);
+  body.classList.toggle('open');
+}
+
+function escHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>

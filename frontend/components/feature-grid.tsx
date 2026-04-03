@@ -8,7 +8,8 @@ import {
   Globe, 
   Users, 
   Mic, 
-  FileText 
+  FileText,
+  SearchCheck
 } from "lucide-react"
 
 const features = [
@@ -61,6 +62,11 @@ const features = [
     icon: FileText,
     title: "Visual Proposal PDFs",
     description: "Create stunning visual proposals that stand out from text-heavy documents."
+  },
+  {
+    icon: SearchCheck,
+    title: "AI Proposal Validation",
+    description: "Upload a proposal PDF and get structured scoring, risk analysis, and issue-by-issue review."
   }
 ]
 
