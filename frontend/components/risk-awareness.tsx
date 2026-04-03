@@ -6,21 +6,21 @@ const risks = [
     severity: "High",
     title: "Competitor pricing below cost threshold",
     description: "BuildRight Inc is bidding 12% below estimated costs, indicating potential quality compromises.",
-    color: "bg-amber-50 border-amber-200"
+    color: "bg-[#ff5c5c] border-black text-black"
   },
   {
     icon: Clock,
     severity: "Medium",
     title: "Tight delivery timeline",
     description: "Requested completion date leaves minimal buffer for delays. Consider discussing timeline flexibility.",
-    color: "bg-blue-50 border-blue-200"
+    color: "bg-[#ffdc5c] border-black text-black"
   },
   {
     icon: Users,
     severity: "Low",
     title: "New client relationship",
     description: "First-time client with no payment history. Standard payment terms recommended.",
-    color: "bg-slate-50 border-slate-200"
+    color: "bg-[#5cafff] border-black text-black"
   }
 ]
 
@@ -41,19 +41,19 @@ export function RiskAwareness() {
           {risks.map((risk) => (
             <div
               key={risk.title}
-              className={`flex items-start gap-4 rounded-lg border p-5 ${risk.color}`}
+              className={`flex items-start gap-4 rounded-none border-[3px] p-5 shadow-[4px_4px_0_0_#000] transition-transform hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#000] ${risk.color}`}
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-background">
-                <risk.icon className="h-5 w-5 text-primary" />
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center border-[3px] border-black bg-white shadow-[2px_2px_0_0_#000]">
+                <risk.icon className="h-6 w-6 text-black" strokeWidth={2.5} />
               </div>
               <div className="flex-1">
                 <div className="mb-1 flex items-center gap-2">
-                  <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  <span className="text-xs font-black uppercase tracking-wide text-black/80">
                     {risk.severity} Risk
                   </span>
                 </div>
-                <p className="font-medium text-foreground">{risk.title}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{risk.description}</p>
+                <p className="font-black text-lg text-black">{risk.title}</p>
+                <p className="mt-1 text-base font-semibold text-black/80">{risk.description}</p>
               </div>
             </div>
           ))}

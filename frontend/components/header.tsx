@@ -1,40 +1,74 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 export function Header() {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b-[4px] border-black bg-white transition-transform duration-300",
+        isVisible ? "translate-y-0" : "-translate-y-full",
+      )}
+    >
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2">
-          {/* <div className="flex h-8 w-8 items-center justify-center rounded-md bg-blue-400">
-            <span className="text-sm font-bold text-primary-foreground">QAI</span>
-          </div> */}
-          <span className="text-lg font-bold text-primary">QuoteAI</span>
+          <div className="flex h-10 w-10 items-center justify-center border-[3px] border-black bg-[#05a3a5] shadow-[2px_2px_0_0_#000]">
+            <span className="text-lg font-black text-black">Q</span>
+          </div>
+          <span className="text-2xl font-black tracking-tight text-black">
+            QUOTE AI
+          </span>
         </Link>
-        
+
         <nav className="hidden items-center gap-8 md:flex">
-          <Link href="#features" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+          <Link
+            href="#features"
+            className="text-sm font-bold text-black border-b-2 border-transparent transition-colors hover:border-black"
+          >
             Features
           </Link>
-          <Link href="#product" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+          <Link
+            href="#product"
+            className="text-sm font-bold text-black border-b-2 border-transparent transition-colors hover:border-black"
+          >
             Product
           </Link>
-          <Link href="#pricing" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+          <Link
+            href="#pricing"
+            className="text-sm font-bold text-black border-b-2 border-transparent transition-colors hover:border-black"
+          >
             Pricing
           </Link>
         </nav>
-        
+
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
             Sign In
           </Button>
-          <Button size="sm">
-            Try Demo
-          </Button>
+          <Button size="sm">Try Demo</Button>
         </div>
       </div>
     </header>
-  )
+  );
 }

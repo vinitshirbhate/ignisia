@@ -1,35 +1,49 @@
-import Link from "next/link"
+import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-background px-6 py-12">
+    <footer className="border-t-[4px] border-black bg-white px-6 py-12">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 md:flex-row">
-        <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
-            <span className="text-sm font-bold text-primary-foreground">B</span>
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center border-[3px] border-black bg-[#05a3a5] shadow-[2px_2px_0_0_#000]">
+            <span className="text-lg font-black text-black">Q</span>
           </div>
-          <span className="text-lg font-semibold text-primary">QuoteAI</span>
+          <span className="text-2xl font-black tracking-tight text-black">
+            QUOTE AI
+          </span>
         </div>
-        
+
         <nav className="flex flex-wrap items-center justify-center gap-6">
-          <Link href="#features" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+          <Link
+            href="#features"
+            className="text-sm font-bold uppercase text-black border-b-2 border-transparent transition-colors hover:border-black"
+          >
             Features
           </Link>
-          <Link href="#product" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+          <Link
+            href="#product"
+            className="text-sm font-bold uppercase text-black border-b-2 border-transparent transition-colors hover:border-black"
+          >
             Product
           </Link>
-          <Link href="#pricing" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+          <Link
+            href="#pricing"
+            className="text-sm font-bold uppercase text-black border-b-2 border-transparent transition-colors hover:border-black"
+          >
             Pricing
           </Link>
-          <Link href="#contact" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+          <Link
+            href="#contact"
+            className="text-sm font-bold uppercase text-black border-b-2 border-transparent transition-colors hover:border-black"
+          >
             Contact
           </Link>
         </nav>
-        
-        <p className="text-sm text-muted-foreground">
+
+        <p className="text-sm font-bold text-black/60">
           © 2026 QuoteAI. All rights reserved.
         </p>
       </div>
     </footer>
-  )
+  );
 }

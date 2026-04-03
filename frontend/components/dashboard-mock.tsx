@@ -2,14 +2,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export function DashboardMock() {
   return (
-    <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-      <div className="mb-4 flex items-center justify-between border-b border-border pb-3">
+    <div className="rounded-none border-[3px] border-black bg-white p-4 shadow-[8px_8px_0_0_#000]">
+      <div className="mb-4 flex items-center justify-between border-b-[3px] border-black pb-3">
         <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full bg-red-400" />
-          <div className="h-3 w-3 rounded-full bg-yellow-400" />
-          <div className="h-3 w-3 rounded-full bg-green-400" />
+          <div className="h-4 w-4 rounded-full border-2 border-black bg-red-400" />
+          <div className="h-4 w-4 rounded-full border-2 border-black bg-yellow-400" />
+          <div className="h-4 w-4 rounded-full border-2 border-black bg-green-400" />
         </div>
-        <span className="text-xs text-muted-foreground">BidWise Dashboard</span>
+        <span className="text-xs font-bold uppercase text-black">BidWise Dashboard</span>
       </div>
       
       <div className="grid gap-4">

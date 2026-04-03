@@ -1,13 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;          /* Pure light white UI as requested */
-  --background-mute: #f8fafc;     /* Standard Slate-50 for secondary backgrounds */
-  --foreground: #000000;          /* Pure black text */
-  --foreground-mute: #000000;     /* Pure black text for descriptions */
+  --background: #ffffff;
+  /* Pure light white UI as requested */
+  --background-mute: #f8fafc;
+  /* Standard Slate-50 for secondary backgrounds */
+  --foreground: #000000;
+  /* Pure black text */
+  --foreground-mute: #000000;
+  /* Pure black text for descriptions */
   --primary: #111FA2;
-  --secondary: #7AAACE;
-  --highlight: #9CD5FF;
+  --secondary: #b6bbc0;
+  --highlight: #7801d9;
 }
 
 @theme inline {

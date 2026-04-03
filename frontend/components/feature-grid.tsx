@@ -81,15 +81,15 @@ export function FeatureGrid() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="group rounded-lg border border-border bg-card p-6 transition-all hover:-translate-y-0.5 hover:border-accent hover:shadow-md"
+              className="group rounded-none border-[3px] border-black bg-white p-6 shadow-[6px_6px_0_0_#000] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[3px_3px_0_0_#000]"
             >
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
-                <feature.icon className="h-5 w-5 text-primary" />
+              <div className="mb-4 flex h-12 w-12 items-center justify-center border-[3px] border-black bg-[#A3E635] shadow-[2px_2px_0_0_#000]">
+                <feature.icon className="h-6 w-6 text-black" strokeWidth={2.5} />
               </div>
-              <h3 className="mb-2 text-lg font-semibold text-foreground">
+              <h3 className="mb-2 text-xl font-bold text-black">
                 {feature.title}
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-base font-medium text-black/80">
                 {feature.description}
               </p>
             </div>

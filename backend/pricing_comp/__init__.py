@@ -1,0 +1,2 @@
+"""Pricing component package."""
+
