@@ -55,10 +55,10 @@ export function Header() {
             Product
           </Link>
           <Link
-            href="#pricing"
+            href="#ai-validate"
             className="text-sm font-bold text-black border-b-2 border-transparent transition-colors hover:border-black"
           >
-            Pricing
+            AI Validate
           </Link>
         </nav>
 
@@ -66,7 +66,9 @@ export function Header() {
           <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
             Sign In
           </Button>
-          <Button size="sm">Try Demo</Button>
+          <Button size="sm" asChild>
+            <Link href="#ai-validate">Try Demo</Link>
+          </Button>
         </div>
       </div>
     </header>

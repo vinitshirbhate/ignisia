@@ -2,6 +2,7 @@ import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { ValueStatement } from "@/components/value-statement"
 import { FeatureGrid } from "@/components/feature-grid"
+// import { AIValidateDemo } from "@/components/ai-validate-demo"
 import { ProductPreview } from "@/components/product-preview"
 import { VoiceFeature } from "@/components/voice-feature"
 import { VisualPDF } from "@/components/visual-pdf"
@@ -18,6 +19,7 @@ export default function Home() {
       <HeroSection />
       <ValueStatement />
       <FeatureGrid />
+      {/* <AIValidateDemo /> */}
       <ProductPreview />
       <VoiceFeature />
       <VisualPDF />
