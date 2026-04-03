@@ -1,28 +1,31 @@
-import { AlertTriangle, TrendingDown, Clock, Users } from "lucide-react"
+import { AlertTriangle, TrendingDown, Clock, Users } from "lucide-react";
 
 const risks = [
   {
     icon: TrendingDown,
     severity: "High",
     title: "Competitor pricing below cost threshold",
-    description: "BuildRight Inc is bidding 12% below estimated costs, indicating potential quality compromises.",
-    color: "bg-[#ff5c5c] border-black text-black"
+    description:
+      "BuildRight Inc is bidding 12% below estimated costs, indicating potential quality compromises.",
+    color: "bg-[#ff5c5c] border-black text-black",
   },
   {
     icon: Clock,
     severity: "Medium",
     title: "Tight delivery timeline",
-    description: "Requested completion date leaves minimal buffer for delays. Consider discussing timeline flexibility.",
-    color: "bg-[#ffdc5c] border-black text-black"
+    description:
+      "Requested completion date leaves minimal buffer for delays. Consider discussing timeline flexibility.",
+    color: "bg-[#ffdc5c] border-black text-black",
   },
   {
     icon: Users,
     severity: "Low",
     title: "New client relationship",
-    description: "First-time client with no payment history. Standard payment terms recommended.",
-    color: "bg-[#5cafff] border-black text-black"
-  }
-]
+    description:
+      "First-time client with no payment history. Standard payment terms recommended.",
+    color: "bg-[#5cafff] border-black text-black",
+  },
+];
 
 export function RiskAwareness() {
   return (
@@ -33,10 +36,11 @@ export function RiskAwareness() {
             Risk-Aware Decision Making
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Identify potential risks before they become problems. QuoteAI analyzes every aspect of your bids.
+            Identify potential risks before they become problems. RFP Flow
+            analyzes every aspect of your bids.
           </p>
         </div>
-        
+
         <div className="mx-auto max-w-3xl space-y-4">
           {risks.map((risk) => (
             <div
@@ -53,12 +57,14 @@ export function RiskAwareness() {
                   </span>
                 </div>
                 <p className="font-black text-lg text-black">{risk.title}</p>
-                <p className="mt-1 text-base font-semibold text-black/80">{risk.description}</p>
+                <p className="mt-1 text-base font-semibold text-black/80">
+                  {risk.description}
+                </p>
               </div>
             </div>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -8,7 +8,7 @@ export function FinalCTA() {
           Make Better Bidding Decisions
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-xl font-bold text-black/80">
-          Join hundreds of SMEs already using QuoteAI to win more contracts and
+          Join hundreds of SMEs already using RFP Flow to win more contracts and
           grow their business.
         </p>
         <div className="mt-10">

@@ -34,10 +34,10 @@ export function Header() {
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-10 w-10 items-center justify-center border-[3px] border-black bg-[#05a3a5] shadow-[2px_2px_0_0_#000]">
-            <span className="text-lg font-black text-black">Q</span>
+            <span className="text-lg font-black text-black">RF</span>
           </div>
           <span className="text-2xl font-black tracking-tight text-black">
-            QUOTE AI
+            RFP Flow
           </span>
         </Link>
 

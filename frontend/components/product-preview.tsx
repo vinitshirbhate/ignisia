@@ -10,7 +10,7 @@ export function ProductPreview() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold text-primary md:text-4xl">
-            See QuoteAI in Action
+            See RFP Flow in Action
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
             A clear, data-driven interface that helps you make informed bidding

@@ -56,13 +56,6 @@ class AIDecisionEngine:
         else:
             decision = "COMPETE"
 
-        strategy = (
-            "Lead with strong value narrative and measurable outcomes."
-            if decision == "DIFFERENTIATE"
-            else "Compete on pricing with clear delivery confidence."
-            if decision == "COMPETE"
-            else "Avoid low-probability bid and preserve margin capacity."
-        )
         actions = [
             "Align proposal with client-specific outcomes and KPIs.",
             "Document risk mitigations and delivery plan.",
@@ -74,11 +67,40 @@ class AIDecisionEngine:
         if risk_level == "high":
             loss_reasons.append("High cost volatility can weaken execution confidence.")
 
+        rec_price = int(round(recommended))
+        aggressive_price = int(round(max(float(context.get("min_safe_price", rec_price) or rec_price), rec_price * 0.93)))
+        diff_price = int(round(rec_price * 1.05))
+        market_summary = (
+            "Highly price-sensitive environment with close competitor pricing."
+            if competitiveness < 0.98
+            else "Moderately competitive market with room for value-led positioning."
+        )
+        pitch_script = (
+            "We can deliver with lower total ownership cost and reliable execution."
+            if decision == "COMPETE"
+            else "We provide faster delivery, quality assurance, and measurable long-term savings."
+        )
+
         return {
-            "win_probability": round(float(win_probability), 3),
             "decision": decision,
-            "strategy": strategy,
+            "market_summary": market_summary,
+            "win_probability": round(float(win_probability), 3),
+            "win_strategy_options": [
+                {
+                    "approach": "Aggressive Pricing",
+                    "price": aggressive_price,
+                    "win_probability": round(float(min(0.95, win_probability + 0.15)), 3),
+                    "risk": "low margin",
+                },
+                {
+                    "approach": "Differentiation",
+                    "price": diff_price,
+                    "win_probability": round(float(max(0.05, win_probability - 0.1)), 3),
+                    "strategy": "Bundle maintenance, faster delivery, and stronger SLA terms.",
+                },
+            ],
             "actions": actions,
+            "pitch_script": pitch_script,
             "loss_reasons": loss_reasons,
         }
 
@@ -91,7 +113,15 @@ class AIDecisionEngine:
             "Analyze this bid context and return JSON only.\n\n"
             f"Context:\n{json.dumps(context, ensure_ascii=True)}\n\n"
             "Return JSON with:\n"
-            '{\n"win_probability": float,\n"decision": "...",\n"strategy": "...",\n"actions": [],\n"loss_reasons": []\n}'
+            '{\n'
+            '"decision": "COMPETE|DIFFERENTIATE|AVOID",\n'
+            '"market_summary": "...",\n'
+            '"win_probability": float,\n'
+            '"win_strategy_options": [{"approach":"...","price":number,"win_probability":float,"risk":"..."| "strategy":"..."}],\n'
+            '"actions": [],\n'
+            '"pitch_script": "...",\n'
+            '"loss_reasons": []\n'
+            "}"
         )
         payload = {
             "model": self.model,
@@ -133,11 +163,38 @@ class AIDecisionEngine:
         decision = str(data.get("decision", fallback["decision"])).upper()
         if decision not in {"COMPETE", "DIFFERENTIATE", "AVOID"}:
             decision = fallback["decision"]
+        options = data.get("win_strategy_options", fallback["win_strategy_options"])
+        safe_options = []
+        if isinstance(options, list):
+            for option in options[:4]:
+                if isinstance(option, dict):
+                    safe_options.append(
+                        {
+                            "approach": str(option.get("approach", "Approach")),
+                            "price": int(float(option.get("price", 0) or 0)),
+                            "win_probability": round(
+                                float(max(0.0, min(1.0, float(option.get("win_probability", 0.5))))),
+                                3,
+                            ),
+                            **(
+                                {"risk": str(option.get("risk"))}
+                                if option.get("risk") is not None
+                                else {"strategy": str(option.get("strategy", ""))}
+                            ),
+                        }
+                    )
+        if not safe_options:
+            safe_options = fallback["win_strategy_options"]
         return {
-            "win_probability": round(float(max(0.0, min(1.0, float(data.get("win_probability", fallback["win_probability"]))))), 3),
             "decision": decision,
-            "strategy": str(data.get("strategy", fallback["strategy"])),
+            "market_summary": str(data.get("market_summary", fallback["market_summary"])),
+            "win_probability": round(
+                float(max(0.0, min(1.0, float(data.get("win_probability", fallback["win_probability"]))))),
+                3,
+            ),
+            "win_strategy_options": safe_options,
             "actions": [str(x) for x in data.get("actions", fallback["actions"])][:6],
+            "pitch_script": str(data.get("pitch_script", fallback["pitch_script"])),
             "loss_reasons": [str(x) for x in data.get("loss_reasons", fallback["loss_reasons"])][:6],
         }
 

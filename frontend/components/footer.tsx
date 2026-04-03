@@ -6,10 +6,10 @@ export function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 md:flex-row">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center border-[3px] border-black bg-[#05a3a5] shadow-[2px_2px_0_0_#000]">
-            <span className="text-lg font-black text-black">Q</span>
+            <span className="text-lg font-black text-black">RF</span>
           </div>
           <span className="text-2xl font-black tracking-tight text-black">
-            QUOTE AI
+            RFP Flow
           </span>
         </div>
 
@@ -41,7 +41,7 @@ export function Footer() {
         </nav>
 
         <p className="text-sm font-bold text-black/60">
-          © 2026 QuoteAI. All rights reserved.
+          © 2026 RFP Flow. All rights reserved.
         </p>
       </div>
     </footer>
