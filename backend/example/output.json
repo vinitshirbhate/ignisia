@@ -1,0 +1,947 @@
+{
+    "rfp_name": "RFP doc",
+    "questions": [
+        {
+            "question_text": "What is the budget for the project?",
+            "category": "pricing",
+            "intent": "information_request",
+            "source": "Budget"
+        },
+        {
+            "question_text": "What is the schedule for the project?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Schedule"
+        },
+        {
+            "question_text": "What are the general requirements for the project?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "General Requirements"
+        },
+        {
+            "question_text": "What are the specific scope of work and project summary requirements?",
+            "category": "technical",
+            "intent": "information_request",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Do you have experience with design-build construction services?",
+            "category": "general",
+            "intent": "capability_check",
+            "source": "Experience"
+        },
+        {
+            "question_text": "Will your proposal comply with the Uniform Guidance regulations?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Description"
+        },
+        {
+            "question_text": "What is the submittal deadline for the proposals?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Submission Requirements"
+        },
+        {
+            "question_text": "What are the selection criteria and weighting for this project?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Selection Criteria"
+        },
+        {
+            "question_text": "Do you provide all design and construction services required for the project?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Will your design and construction comply with the City of Gastonia Standard Specifications?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Can you confirm the location of the project at 913 N. Pryor Street, Gastonia, NC 28052?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Location"
+        },
+        {
+            "question_text": "Do you have experience in designing and constructing swimming pools with features such as geysers, buckets, rainfalls, and slides?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Description"
+        },
+        {
+            "question_text": "Will the decking be based on 7,761 square feet as specified?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Description"
+        },
+        {
+            "question_text": "Will your renovations comply with current ADA standards?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "What is your proposed budget for construction, labor, and design?",
+            "category": "pricing",
+            "intent": "information_request",
+            "source": "Budget"
+        },
+        {
+            "question_text": "Can you confirm that the features included in your design will be the same or similar to those noted in Section 2.1.1?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "What is your anticipated schedule for the kickoff – scoping meeting?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Schedule"
+        },
+        {
+            "question_text": "What is your anticipated schedule for the 30% design review?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Schedule"
+        },
+        {
+            "question_text": "What is your anticipated schedule for the 100% final design plans / construction documents?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Schedule"
+        },
+        {
+            "question_text": "What is your anticipated schedule for the 100% design review and pre-construction meeting?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Schedule"
+        },
+        {
+            "question_text": "What is your anticipated schedule for permitting?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Schedule"
+        },
+        {
+            "question_text": "What is your anticipated schedule for construction?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Schedule"
+        },
+        {
+            "question_text": "What is your anticipated schedule for as-built drawings?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Schedule"
+        },
+        {
+            "question_text": "Will all DB design development, DB construction documents, and as-constructed drawings be submitted to the City of Gastonia Representative Tripp White?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Schedule"
+        },
+        {
+            "question_text": "Do you have experience in designing and constructing swimming pools?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will your design include geysers, buckets, rainfalls, and a double-loop slide?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Can you provide a detailed plan for the decking based on 7,761 sq. ft.?",
+            "category": "technical",
+            "intent": "information_request",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you demo the existing pool and remove debris?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Do you have the capability to form and do final excavation?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Can you handle the hauling of spoils on-site within the grading contractor?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you provide a zero entry, spiral slide, water feature, and 3-4 lane lap swim with a maximum depth of 5’?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Are you responsible for surveying, corners, elevation, and laying out the pool?",
+            "category": "technical",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will electrical service and water supply be on site prior to the start of construction?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will the pool be designed and constructed of reinforced concrete in accordance with plans and engineering?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will the reinforcing of rebar, size, and spacing be in accordance with drawings?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will the concrete pool walls be constructed as planned and in accordance with engineering?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you purchase and install white goods, filtration, chemical system, and feeders as noted in the drawings?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you provide ladders, railings, anchors, and stanchions as noted on plans?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you purchase and install the Bulkhead as noted on plans?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you purchase and install tile as shown on drawings?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will the interior of the pool have a waterproof plaster finish that is 3/8” to ½” thick as noted on plans?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will any additional required equipment be provided per plan and code?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you provide pool maintenance and safety equipment per plan?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will all recirculation piping be a minimum schedule of 40 PVC?",
+            "category": "technical",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you install anchors for ladders, stanchions, and other anchors as noted on drawings?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will the electrical bonding of the swimming pool be provided per code?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you form and install decking around the pool to have a light broom finish?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Do you support the installation of waterslides and footings?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Do you support the installation of water features such as rainfall, buckets, and geysers?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you comply with the pool start-up specifications?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you install fencing and gates per code?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you furnish pumps, filters, automated systems, and chlorinators?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Are you responsible for the concrete pad and rough-in for plumbing and electrical?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you obtain and procure all building permits, surveying, and plan reviews?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you ensure compliance with all NC and local Public Swimming Pool codes?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will your proposals comply with the codes in the City of Gastonia?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will your work comply with ADA requirements where needed?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Can you guide the City through a project from beginning to end?",
+            "category": "general",
+            "intent": "capability_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Will you work with City staff and the Task Force to plan and develop the project?",
+            "category": "general",
+            "intent": "capability_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Can you provide suggestions to meet the City's needs?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Will the project be turnkey with all costs included?",
+            "category": "pricing",
+            "intent": "compliance_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Will you adhere strictly to the project schedule?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "How will you assist in assessing the needs of the community?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "What options do you propose for meeting the identified needs?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "How will you assess options for the location of the new facility?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Can you develop a conceptual design and cost estimates for the proposed facility?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you develop schematic design drawings to a level sufficient for establishing overall project cost and budget?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "How will you analyze the ongoing costs to operate and maintain the concept facility?",
+            "category": "pricing",
+            "intent": "information_request",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "What other components do you suggest for the best project outcomes?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will the renovations comply with current ADA standards?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Construction Requirements"
+        },
+        {
+            "question_text": "Can you provide a list of proposed materials for the renovations?",
+            "category": "technical",
+            "intent": "information_request",
+            "source": "Construction Requirements"
+        },
+        {
+            "question_text": "Will you provide a rendering for the renovations?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Construction Requirements"
+        },
+        {
+            "question_text": "Will progress payments during the design phase be based on the submission, review, and acceptance of design deliverables?",
+            "category": "pricing",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will progress payments during construction be based on the percentage of work completed on items listed on the approved schedule of values?",
+            "category": "pricing",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will actual construction completed and in place form the basis for payment?",
+            "category": "pricing",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will all progress payments be for the services performed through the last day of the preceding month?",
+            "category": "pricing",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will the City of Gastonia arrange a kickoff scoping meeting after the award of the contract?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will the meeting agenda include a review and emphasis on the needs and design objectives of the project?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will the design schedule require a minimum of two hard copies and one electronic version?",
+            "category": "general",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will any portion of the work begin construction until 100% Complete DB Construction Documents are approved?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you provide submittals during the design phase?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Are there areas available for use by the DBC?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "What are the payment terms to the DBC?",
+            "category": "pricing",
+            "intent": "information_request",
+            "source": "Budget"
+        },
+        {
+            "question_text": "Will you attend the on-site Preconstruction meeting arranged by the City of Gastonia?",
+            "category": "general",
+            "intent": "capability_check",
+            "source": "Schedule"
+        },
+        {
+            "question_text": "Who will be designated as your Project Superintendent?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Will you provide a fully developed Project Schedule for the construction portion?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Will the list of subcontractors for this project match the one in your proposal?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Do you have a Waste Management Plan?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Will you provide a Quality Control Plan?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "What are your correspondence procedures?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope"
+        },
+        {
+            "question_text": "What are the roles and responsibilities for this project?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope"
+        },
+        {
+            "question_text": "How will progress payments be managed?",
+            "category": "pricing",
+            "intent": "information_request",
+            "source": "Scope"
+        },
+        {
+            "question_text": "What is your submittal process?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Will you provide a minimum of two color hard copies and an electronic copy of the construction schedule?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Will construction begin only after 100% Complete DB Construction Documents are approved?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Will you submit 2 paper copies and one electronic copy of the Draft DB Design Development Documents for review?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you submit 2 paper copies and one electronic copy of the 100% Draft DB Construction Documents for review?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you submit 2 paper copies and one electronic copy of the 100% Completed Stamped and Signed DB Construction Document?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Do you employ construction practices that minimize dust production and combustion byproducts?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Construction Requirements"
+        },
+        {
+            "question_text": "Will you minimize noise generation during construction?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Construction Requirements"
+        },
+        {
+            "question_text": "Do you operate power equipment in accordance with local noise restrictions?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Construction Requirements"
+        },
+        {
+            "question_text": "Will you employ processes that ensure the generation of as little waste as possible?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Construction Requirements"
+        },
+        {
+            "question_text": "Will you minimize waste disposal in landfills?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Construction Requirements"
+        },
+        {
+            "question_text": "Will all material unsuitable for recycling be disposed of in a legal manner?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Construction Requirements"
+        },
+        {
+            "question_text": "Will the construction site be limited to the smallest feasible area?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Construction Requirements"
+        },
+        {
+            "question_text": "Is staging available in or near the construction area for a construction trailer?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Construction Requirements"
+        },
+        {
+            "question_text": "Will construction equipment and material storage be located in areas near the construction site?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Construction Requirements"
+        },
+        {
+            "question_text": "Will all staging areas be returned to pre-construction conditions once construction is complete?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will the location of trailers, storage, and staging areas be approved by the City’s Project Manager?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will parking of construction vehicles be limited to existing roads and legally designated areas?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will each bidder base their bid upon the materials and equipment as described in the bidding documents?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Submission Requirements"
+        },
+        {
+            "question_text": "Will the successful Contractor be required to obtain authorization from the Owner before installing any work in variance with the requirements of the Contract Documents?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Submission Requirements"
+        },
+        {
+            "question_text": "Will all work be limited to the weekday hours of 8:00 a.m.?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you coordinate construction efforts to minimize impact to City personnel and the visiting public?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you maintain one complete full-size set of contract drawings and one full-size set of vendor-supplied drawings?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you clearly mark changes, deletions, and additions to show actual constructed conditions?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you keep record drawings current?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you provide certification of accuracy and completeness for monthly payment requisitions?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you submit complete record drawings upon completion of the total project?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you provide as-constructed drawings in PDF and DWG formats?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you provide a full-size Mylar copy of the as-constructed drawings?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you provide full-size paper copies of the as-constructed drawings?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will your submission include Project Record Drawings and As-Constructed Drawings as specified?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you provide guarantees and bonds as specified in Performance Requirements and Specifications?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you verify in writing that all mechanical and electrical systems are complete?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you verify in writing that all mechanical and electrical systems have been properly started and are operational?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you verify in writing that all controls are complete and operational, and sequences have been checked and are functioning properly?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you submit written certification that the project is substantially complete?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you request a final inspection in writing upon substantial completion?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Can you ensure that the OR will proceed with an inspection within 5 days of the receipt of the request?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you prepare a list of deficiencies to be corrected before final acceptance?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you issue a Letter of Substantial Completion once the work is determined to be substantially complete?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you notify the DBC in writing if the work is not determined to be substantially complete?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you resubmit certification and request a new final inspection after completing work?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Can you complete the work described on the list of deficiencies within 10 calendar days?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "What will you do if you fail to complete the work within the specified time frame?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Will you accept the work after all deficiencies have been corrected?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "Do you have any ideas, thoughts, or concepts that differentiate your firm from the competition?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Submission Requirements"
+        },
+        {
+            "question_text": "Can you provide a list of the licensed design professionals and licensed contractors that will work on the project?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Experience"
+        },
+        {
+            "question_text": "Will you include an explanation of the key staff members and their corresponding job classifications assigned to provide the services described in this RFQ?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Experience"
+        },
+        {
+            "question_text": "Will you provide resumes of each staff member designated above, including name, position, education, and years and type of experience?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Experience"
+        },
+        {
+            "question_text": "What strategies will you use for the solicitation of licensed contractors or subcontractors that are compliant with N.C.G.S. Article 8, Chapter 143?",
+            "category": "compliance",
+            "intent": "strategy",
+            "source": "Experience"
+        },
+        {
+            "question_text": "Can you coordinate the design and construction of the renovations and the new facility with the existing operations?",
+            "category": "general",
+            "intent": "capability_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Can you provide detailed descriptions of no more than three projects that illustrate your experience and capabilities relevant to this project?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Experience"
+        },
+        {
+            "question_text": "For projects that went forward to construction, can you include the engineer’s estimate, the successful low bid for construction, and final costs?",
+            "category": "pricing",
+            "intent": "information_request",
+            "source": "Scope of Work"
+        },
+        {
+            "question_text": "What is your proposed approach to this assignment?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Scope"
+        },
+        {
+            "question_text": "How have your proposed Project team members performed on past projects with interactive design reviews?",
+            "category": "technical",
+            "intent": "capability_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "What is your approach to budget management and control?",
+            "category": "pricing",
+            "intent": "information_request",
+            "source": "Scope"
+        },
+        {
+            "question_text": "Can you develop a realistic outline schedule for the design and build process?",
+            "category": "general",
+            "intent": "capability_check",
+            "source": "Scope"
+        },
+        {
+            "question_text": "What is your methodology and approach for the proposed project?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Selection Criteria"
+        },
+        {
+            "question_text": "Can you provide a detailed project schedule and estimated delivery time?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Selection Criteria"
+        },
+        {
+            "question_text": "What is your history in completing past projects within established budgets and timelines?",
+            "category": "general",
+            "intent": "capability_check",
+            "source": "Selection Criteria"
+        },
+        {
+            "question_text": "What are the qualifications, relevant experience, and capabilities of your team?",
+            "category": "general",
+            "intent": "capability_check",
+            "source": "Selection Criteria"
+        },
+        {
+            "question_text": "Can you provide references for your past projects?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Selection Criteria"
+        },
+        {
+            "question_text": "Will you submit a fully completed RFQ by the deadline?",
+            "category": "compliance",
+            "intent": "compliance_check",
+            "source": "Submittal Deadlines"
+        },
+        {
+            "question_text": "Can the City cancel this RFP for any reason without liability?",
+            "category": "general",
+            "intent": "compliance_check",
+            "source": "Description"
+        },
+        {
+            "question_text": "Is there a maximum page limit for the Statement of Qualifications / Proposal?",
+            "category": "general",
+            "intent": "information_request",
+            "source": "Submission Requirements"
+        }
+    ]
+}
