@@ -1,0 +1,225 @@
+{
+    "projects": [
+        {
+            "project_id": "P001",
+            "type": "Classroom Interior",
+            "client": "ABC University",
+            "area_sqft": 15000,
+            "complexity": "Medium",
+            "timeline": {
+                "promised_days": 90,
+                "actual_days": 105
+            },
+            "cost": {
+                "estimated": 18000000,
+                "actual": 20000000
+            },
+            "profit_margin_percent": 18,
+            "vendors_used": [
+                "V001",
+                "V002"
+            ],
+            "materials_used": [
+                "M001",
+                "M002"
+            ],
+            "issues": [
+                {
+                    "type": "Delay",
+                    "cause": "Vendor Delay",
+                    "vendor_id": "V001",
+                    "impact_days": 10
+                }
+            ]
+        },
+        {
+            "project_id": "P002",
+            "type": "Auditorium Interior",
+            "client": "XYZ College",
+            "area_sqft": 12000,
+            "complexity": "High",
+            "timeline": {
+                "promised_days": 120,
+                "actual_days": 145
+            },
+            "cost": {
+                "estimated": 25000000,
+                "actual": 29000000
+            },
+            "profit_margin_percent": 12,
+            "vendors_used": [
+                "V001",
+                "V003"
+            ],
+            "materials_used": [
+                "M001",
+                "M003"
+            ],
+            "issues": [
+                {
+                    "type": "Cost Overrun",
+                    "cause": "Material Price Spike",
+                    "material_id": "M003",
+                    "impact_amount": 3000000
+                }
+            ]
+        }
+    ],
+    "vendors": [
+        {
+            "vendor_id": "V001",
+            "name": "ABC Plywood Supplier",
+            "category": "Wood",
+            "performance_history": [
+                {
+                    "project_id": "P001",
+                    "delay_days": 10,
+                    "quality_score": 0.8
+                },
+                {
+                    "project_id": "P002",
+                    "delay_days": 12,
+                    "quality_score": 0.75
+                }
+            ],
+            "base_cost_index": 0.9,
+            "reliability_trend": [
+                {
+                    "month": "2024-01",
+                    "score": 0.75
+                },
+                {
+                    "month": "2024-02",
+                    "score": 0.72
+                },
+                {
+                    "month": "2024-03",
+                    "score": 0.70
+                }
+            ]
+        },
+        {
+            "vendor_id": "V002",
+            "name": "BrightLight Solutions",
+            "category": "Lighting",
+            "performance_history": [
+                {
+                    "project_id": "P001",
+                    "delay_days": 0,
+                    "quality_score": 0.95
+                }
+            ],
+            "base_cost_index": 1.1,
+            "reliability_trend": [
+                {
+                    "month": "2024-01",
+                    "score": 0.95
+                },
+                {
+                    "month": "2024-02",
+                    "score": 0.96
+                },
+                {
+                    "month": "2024-03",
+                    "score": 0.97
+                }
+            ]
+        }
+    ],
+    "materials": [
+        {
+            "material_id": "M001",
+            "name": "Plywood",
+            "price_history": [
+                {
+                    "month": "2024-01",
+                    "price": 78
+                },
+                {
+                    "month": "2024-02",
+                    "price": 82
+                },
+                {
+                    "month": "2024-03",
+                    "price": 85
+                }
+            ],
+            "volatility": 0.12
+        },
+        {
+            "material_id": "M003",
+            "name": "Acoustic Panels",
+            "price_history": [
+                {
+                    "month": "2024-01",
+                    "price": 230
+                },
+                {
+                    "month": "2024-02",
+                    "price": 245
+                },
+                {
+                    "month": "2024-03",
+                    "price": 260
+                }
+            ],
+            "volatility": 0.18
+        }
+    ],
+    "decisions": [
+        {
+            "decision_id": "D001",
+            "project_id": "P002",
+            "decision": "Selected low-cost vendor V001",
+            "reason": "Reduce initial cost",
+            "predicted_outcome": {
+                "delay_risk": 0.4,
+                "cost_saving": 1500000
+            },
+            "actual_outcome": {
+                "delay_days": 15,
+                "cost_overrun": 3000000
+            }
+        }
+    ],
+    "risk_patterns": [
+        {
+            "risk_id": "R001",
+            "risk_type": "Auditorium Delay",
+            "trigger_conditions": [
+                "high_complexity",
+                "vendor_V001",
+                "high_material_volatility"
+            ],
+            "probability": 0.72,
+            "avg_impact_days": 18
+        }
+    ],
+    "workforce": {
+        "time_series": [
+            {
+                "month": "2024-01",
+                "designers_available": 6,
+                "ongoing_projects": 2,
+                "utilization": 0.7
+            },
+            {
+                "month": "2024-02",
+                "designers_available": 5,
+                "ongoing_projects": 3,
+                "utilization": 0.9
+            }
+        ],
+        "capacity_limits": {
+            "max_parallel_projects": 3
+        }
+    },
+    "pricing_benchmarks": {
+        "classroom": {
+            "cost_per_sqft": 1600
+        },
+        "auditorium": {
+            "cost_per_sqft": 2200
+        }
+    }
+}
