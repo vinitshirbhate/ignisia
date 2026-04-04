@@ -49,13 +49,18 @@ export function AIProposalContent() {
   const [reasonBusy, setReasonBusy] = useState(false);
   const [reasonErr, setReasonErr] = useState<string | null>(null);
 
-  const reasonPayload = useMemo(() => extractReasonPayloadFromAnalyze(raw), [raw]);
+  const reasonPayload = useMemo(
+    () => extractReasonPayloadFromAnalyze(raw),
+    [raw],
+  );
 
   const sendForReasoning = async () => {
     setReasonErr(null);
     const body = extractReasonPayloadFromAnalyze(raw);
     if (!body) {
-      setReasonErr("No proposal + external data to send. Complete pricing first.");
+      setReasonErr(
+        "No proposal + external data to send. Complete pricing first.",
+      );
       return;
     }
     setReasonBusy(true);
@@ -65,7 +70,11 @@ export function AIProposalContent() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      const j = (await res.json()) as { ok?: boolean; error?: string; detail?: string };
+      const j = (await res.json()) as {
+        ok?: boolean;
+        error?: string;
+        detail?: string;
+      };
       if (!res.ok || !j.ok) {
         const msg = [j.error, j.detail].filter(Boolean).join(" — ");
         setReasonErr(msg || `Request failed (${res.status})`);
@@ -151,10 +160,10 @@ export function AIProposalContent() {
         <p className="text-center text-lg font-black uppercase text-black">
           No proposal loaded
         </p>
-        <p className="max-w-md text-center text-sm font-bold text-black/70">
+        {/* <p className="max-w-md text-center text-sm font-bold text-black/70">
           Upload a PDF from the home page (&quot;Upload Your RFP Now&quot;).
           When analysis finishes, you&apos;ll land here automatically.
-        </p>
+        </p> */}
         <Button
           asChild
           className="border-[3px] border-black font-black uppercase shadow-[4px_4px_0_0_#000]"
@@ -169,7 +178,9 @@ export function AIProposalContent() {
     return (
       <main className="mx-auto flex max-w-3xl flex-col gap-6 px-6 py-16">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="text-3xl font-black uppercase text-black">AI Proposal</h1>
+          <h1 className="text-3xl font-black uppercase text-black">
+            AI Proposal
+          </h1>
           <div className="flex flex-wrap items-center gap-2">
             <Button
               type="button"
@@ -332,7 +343,7 @@ export function AIProposalContent() {
             </div>
           </div>
           <div className="flex items-center gap-3 border-[3px] border-black bg-white p-4 shadow-[4px_4px_0_0_#000]">
-            <div className="flex border-[3px] border-black bg-[#f472b6] p-2">
+            <div className="flex border-[3px] border-black bg-[#ff5c5c] p-2">
               <AlertCircle className="h-6 w-6 text-black" strokeWidth={2.5} />
             </div>
             <div>
@@ -460,7 +471,7 @@ export function AIProposalContent() {
                   <p className="text-xs font-black uppercase tracking-wider text-black/60">
                     Import / FX
                   </p>
-                  <div className="mt-2 inline-block border-[3px] border-black bg-[#f472b6] p-2 text-sm font-bold text-black shadow-[2px_2px_0_0_#000]">
+                  <div className="mt-2 inline-block border-[3px] border-black bg-[#ff5c5c] p-2 text-sm font-bold text-black shadow-[2px_2px_0_0_#000]">
                     {importSummary(data.import_costs)}
                   </div>
                 </div>

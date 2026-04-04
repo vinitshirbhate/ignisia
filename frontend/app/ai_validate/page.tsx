@@ -8,9 +8,10 @@ import {
   Loader2,
   ShieldAlert,
 } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 import {
   Card,
   CardContent,
@@ -102,32 +103,31 @@ export default function AIValidateDemo() {
   }
 
   return (
-    <section id="ai-validate" className="bg-[#FFF7E8] px-6 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-10 max-w-3xl">
-          <p className="mb-3 inline-flex items-center border-[3px] border-black bg-[#A3E635] px-3 py-1 text-sm font-black uppercase tracking-[0.18em] text-black shadow-[3px_3px_0_0_#000]">
-            AI Validate
-          </p>
-          <h2 className="text-3xl font-black text-black md:text-5xl">
-            Upload a proposal and get a structured risk review.
-          </h2>
-          <p className="mt-4 text-base font-medium text-black/80 md:text-lg">
-            This connects the frontend directly to the FastAPI validator so you
-            can inspect score, risk level, missing sections, and issue-by-issue
-            feedback in one place.
-          </p>
-        </div>
+    <div className="flex min-h-screen flex-col bg-[#f8fafc]">
+      <Header />
+      <main id="ai-validate" className="flex-1 px-6 py-12 md:py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 max-w-3xl">
+            <h1 className="mb-4 inline-block border-[3px] border-black bg-[#A3E635] p-3 text-4xl font-black uppercase tracking-tight text-black shadow-[6px_6px_0_0_#000] md:text-5xl">
+              AI Validate
+            </h1>
+            <h2 className="text-2xl font-black text-black md:text-3xl">
+              Upload a proposal and get a structured risk review.
+            </h2>
+            {/* <p className="mt-4 text-base font-medium text-black/80 md:text-lg">
+              This connects the frontend directly to the FastAPI validator so you
+              can inspect score, risk level, missing sections, and issue-by-issue
+              feedback in one place.
+            </p> */}
+          </div>
 
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <Card className="border-[4px] border-black bg-white shadow-[8px_8px_0_0_#000]">
             <CardHeader>
               <CardTitle className="text-2xl font-black text-black">
                 Run validation
               </CardTitle>
-              <CardDescription className="text-sm font-medium text-black/70">
-                PDF only. The backend must be running on{" "}
-                <code>{apiBaseUrl}</code>.
-              </CardDescription>
+              
             </CardHeader>
             <CardContent className="space-y-5">
               <label
@@ -196,12 +196,9 @@ export default function AIValidateDemo() {
               <CardTitle className="text-2xl font-black text-black">
                 Validation output
               </CardTitle>
-              <CardDescription className="text-sm font-medium text-black/70">
-                Results are rendered from the API response as soon as the review
-                completes.
-              </CardDescription>
+              
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-6 max-h-[800px] overflow-y-auto pr-2">
               {!result ? (
                 <div className="flex min-h-80 flex-col items-center justify-center border-[3px] border-black bg-[#F8FAFC] p-8 text-center">
                   <ShieldAlert
@@ -348,6 +345,8 @@ export default function AIValidateDemo() {
           </Card>
         </div>
       </div>
-    </section>
+      </main>
+      <Footer />
+    </div>
   );
 }
