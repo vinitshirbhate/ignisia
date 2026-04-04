@@ -6,7 +6,10 @@ from pathlib import Path
 import fitz
 import numpy as np
 import requests
-from sentence_transformers import SentenceTransformer
+
+# Force transformers/sentence-transformers onto the PyTorch path.
+# This avoids importing the local TensorFlow/Keras stack during API startup.
+os.environ.setdefault("USE_TF", "0")
 
 
 RAG_DIR = Path(__file__).resolve().parent.parent.parent / "RAG"
@@ -40,7 +43,9 @@ def _extract_chunks(pdf_path: Path) -> list[dict[str, str | int]]:
 
 
 @lru_cache(maxsize=1)
-def _embedder() -> SentenceTransformer:
+def _embedder():
+    from sentence_transformers import SentenceTransformer
+
     return SentenceTransformer("all-MiniLM-L6-v2")
 
 

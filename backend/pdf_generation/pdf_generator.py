@@ -18,14 +18,23 @@ from reportlab.platypus import (
 
 from schemas import ProposalRequest
 
-
-PRIMARY = colors.HexColor("#2563EB")
-DARK_TEXT = colors.HexColor("#111827")
-SECONDARY_TEXT = colors.HexColor("#6B7280")
-LIGHT_BACKGROUND = colors.HexColor("#F9FAFB")
-TABLE_HEADER = colors.HexColor("#E5E7EB")
-HIGHLIGHT_BOX = colors.HexColor("#DBEAFE")
-BORDER = colors.HexColor("#E5E7EB")
+# ── Palette: Deep Navy · Electric Teal · Warm Gold ───────────────────────────
+#
+#   PRIMARY          – electric teal  : headings, accents, logo badge, HR rules
+#   DARK_TEXT        – crisp white    : body text on dark surfaces / near-black on light
+#   SECONDARY_TEXT   – cool slate     : muted labels, footer, right-aligned small text
+#   LIGHT_BACKGROUND – midnight tint  : alternating table rows (very subtle dark wash)
+#   TABLE_HEADER     – deep navy      : pricing table header band
+#   HIGHLIGHT_BOX    – teal wash      : value-add section background
+#   BORDER           – steel line     : all borders / grid lines
+#
+PRIMARY           = colors.HexColor("#057A78")   # electric teal
+DARK_TEXT         = colors.HexColor("#0F172A")   # deep navy (body text on white)
+SECONDARY_TEXT    = colors.HexColor("#64748B")   # cool slate
+LIGHT_BACKGROUND  = colors.HexColor("#F0FDFC")   # barely-teal white (alt rows)
+TABLE_HEADER      = colors.HexColor("#02194E")   # deep navy header band
+HIGHLIGHT_BOX     = colors.HexColor("#FFFFFF")   # soft teal wash
+BORDER            = colors.HexColor("#CBD5E1")   # steel border
 STAMP_PATH = Path(__file__).resolve().parent / "stamp.png"
 
 
@@ -114,6 +123,16 @@ def _styles():
             alignment=TA_RIGHT,
         )
     )
+    # Extra style: pricing table header text (white on dark navy)
+    base.add(
+        ParagraphStyle(
+            name="TableHeaderText",
+            fontName="Helvetica-Bold",
+            fontSize=9,
+            leading=12,
+            textColor=colors.white,
+        )
+    )
     return base
 
 
@@ -138,6 +157,8 @@ def key_value_grid(values: list[tuple[str, str]], styles) -> Table:
                         [
                             ("BACKGROUND", (0, 0), (-1, -1), colors.white),
                             ("BOX", (0, 0), (-1, -1), 1, BORDER),
+                            # teal left accent bar on each card
+                            ("LINEBEFORE", (0, 0), (0, -1), 3, PRIMARY),
                             ("LEFTPADDING", (0, 0), (-1, -1), 10),
                             ("RIGHTPADDING", (0, 0), (-1, -1), 10),
                             ("TOPPADDING", (0, 0), (-1, -1), 8),
@@ -193,11 +214,14 @@ def build_pricing_table(payload: ProposalRequest, styles) -> tuple[Table, float,
 
     table = Table(rows, colWidths=[89 * mm, 20 * mm, 35 * mm, 35 * mm], repeatRows=1)
     style_commands = [
+        # Dark navy header with white text
         ("BACKGROUND", (0, 0), (-1, 0), TABLE_HEADER),
-        ("TEXTCOLOR", (0, 0), (-1, 0), DARK_TEXT),
+        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
         ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
         ("FONTSIZE", (0, 0), (-1, 0), 9),
-        ("GRID", (0, 0), (-1, -1), 1, BORDER),
+        # teal bottom border under header for a pop of colour
+        ("LINEBELOW", (0, 0), (-1, 0), 2, PRIMARY),
+        ("GRID", (0, 0), (-1, -1), 0.5, BORDER),
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
         ("LEFTPADDING", (0, 0), (-1, -1), 10),
         ("RIGHTPADDING", (0, 0), (-1, -1), 10),
@@ -229,9 +253,9 @@ def build_summary_table(subtotal: float, gst: float, grand_total: float, gst_per
                 ("FONTNAME", (0, 2), (-1, 2), "Helvetica-Bold"),
                 ("TEXTCOLOR", (0, 2), (-1, 2), PRIMARY),
                 ("FONTSIZE", (0, 0), (-1, 1), 9),
-                ("FONTSIZE", (0, 2), (-1, 2), 12),
-                ("LINEABOVE", (0, 0), (-1, 0), 1, BORDER),
-                ("LINEBELOW", (0, 1), (-1, 1), 1, BORDER),
+                ("FONTSIZE", (0, 2), (-1, 2), 13),
+                ("LINEABOVE", (0, 0), (-1, 0), 0.5, BORDER),
+                ("LINEBELOW", (0, 1), (-1, 1), 2, PRIMARY),   # teal separator above grand total
                 ("BACKGROUND", (0, 2), (-1, 2), colors.white),
                 ("ALIGN", (0, 0), (-1, -1), "RIGHT"),
                 ("LEFTPADDING", (0, 0), (-1, -1), 8),
@@ -274,10 +298,10 @@ def build_proposal_pdf(payload: ProposalRequest) -> bytes:
                                 rowHeights=[14 * mm],
                                 style=TableStyle(
                                     [
-                                        ("BACKGROUND", (0, 0), (-1, -1), PRIMARY),
+                                        ("BACKGROUND", (0, 0), (-1, -1), TABLE_HEADER),  # navy badge
                                         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
                                         ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-                                        ("BOX", (0, 0), (-1, -1), 0, PRIMARY),
+                                        ("BOX", (0, 0), (-1, -1), 2, PRIMARY),           # teal border ring
                                     ]
                                 ),
                             ),
@@ -304,7 +328,9 @@ def build_proposal_pdf(payload: ProposalRequest) -> bytes:
             style=TableStyle([("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0)]),
         ),
         Spacer(1, 8),
-        HRFlowable(width="100%", thickness=1.2, color=PRIMARY),
+        # Double rule: thin teal over thicker teal for a layered effect
+        HRFlowable(width="100%", thickness=3, color=TABLE_HEADER, spaceAfter=2),
+        HRFlowable(width="100%", thickness=1.5, color=PRIMARY),
         Spacer(1, 10),
         Paragraph(payload.document.title, styles["SectionTitlePrimary"]),
         Paragraph(payload.project_title, styles["TitlePrimary"]),
@@ -337,7 +363,8 @@ def build_proposal_pdf(payload: ProposalRequest) -> bytes:
                     colWidths=[84 * mm],
                     style=TableStyle(
                         [
-                            ("BOX", (0, 0), (-1, -1), 1, BORDER),
+                            ("BOX", (0, 0), (-1, -1), 0.5, BORDER),
+                            ("LINEBEFORE", (0, 0), (0, -1), 3, PRIMARY),   # teal left bar
                             ("TOPPADDING", (0, 0), (-1, -1), 8),
                             ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
                             ("LEFTPADDING", (0, 0), (-1, -1), 10),
@@ -353,7 +380,8 @@ def build_proposal_pdf(payload: ProposalRequest) -> bytes:
                     colWidths=[84 * mm],
                     style=TableStyle(
                         [
-                            ("BOX", (0, 0), (-1, -1), 1, BORDER),
+                            ("BOX", (0, 0), (-1, -1), 0.5, BORDER),
+                            ("LINEBEFORE", (0, 0), (0, -1), 3, PRIMARY),   # teal left bar
                             ("TOPPADDING", (0, 0), (-1, -1), 8),
                             ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
                             ("LEFTPADDING", (0, 0), (-1, -1), 10),
@@ -387,8 +415,9 @@ def build_proposal_pdf(payload: ProposalRequest) -> bytes:
             style=TableStyle(
                 [
                     ("BACKGROUND", (0, 0), (-1, -1), HIGHLIGHT_BOX),
-                    ("BOX", (0, 0), (-1, -1), 1, BORDER),
-                    ("LEFTPADDING", (0, 0), (-1, -1), 12),
+                    ("BOX", (0, 0), (-1, -1), 0.5, BORDER),
+                    ("LINEBEFORE", (0, 0), (0, -1), 4, PRIMARY),   # bold teal left bar
+                    ("LEFTPADDING", (0, 0), (-1, -1), 14),
                     ("RIGHTPADDING", (0, 0), (-1, -1), 12),
                     ("TOPPADDING", (0, 0), (-1, -1), 8),
                     ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
@@ -421,7 +450,8 @@ def build_proposal_pdf(payload: ProposalRequest) -> bytes:
     story.extend(
         [
             Spacer(1, 14),
-            HRFlowable(width="100%", thickness=1, color=BORDER),
+            HRFlowable(width="100%", thickness=1.5, color=PRIMARY),   # teal footer rule
+            HRFlowable(width="100%", thickness=3, color=TABLE_HEADER, spaceAfter=8),
             Spacer(1, 8),
             Table(
                 [[

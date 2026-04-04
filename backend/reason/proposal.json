@@ -1,0 +1,68 @@
+{
+    "project_summary": {
+      "region": "Mumbai",
+      "state": "Maharashtra",
+      "project_type": "commercial",
+      "area_sqft": 1000,
+      "duration_weeks": 8
+    },
+    "material_costs": {
+      "items": [
+        {
+          "item": "cement",
+          "quantity": 100,
+          "unit_price_ex_gst": 437,
+          "gst": 7866,
+          "total_incl_gst": 51566
+        },
+        {
+          "item": "plywood 18mm BWR",
+          "quantity": 2000,
+          "unit_price_ex_gst": 83,
+          "gst": 29880,
+          "total_incl_gst": 195880
+        },
+        {
+          "item": "vitrified tiles 600x600",
+          "quantity": 1000,
+          "unit_price_ex_gst": 106,
+          "gst": 19080,
+          "total_incl_gst": 125080
+        },
+        {
+          "item": "LED panel light 36W",
+          "quantity": 50,
+          "unit_price_ex_gst": 1035,
+          "gst": 6210,
+          "total_incl_gst": 57960
+        },
+        {
+          "item": "laminate sheet 1mm",
+          "quantity": 150,
+          "unit_price_ex_gst": 1265,
+          "gst": 34155,
+          "total_incl_gst": 223905
+        }
+      ],
+      "subtotal_ex_gst": 557200,
+      "total_gst": 97191,
+      "grand_total_incl_gst": 654391
+    },
+    "labor_costs": {
+      "total_labor_cost": 741255,
+      "labor_cost_per_sqft": 741
+    },
+    "import_costs": {
+      "none": "No imported items stated in the RFP."
+    },
+    "summary_totals": {
+      "total_materials_with_gst": 654391,
+      "total_labor": 741255,
+      "total_project_cost": 1390646
+    },
+    "contingency": {
+      "percentage": 5,
+      "amount": 69532.3
+    },
+    "grand_total": 1460178.3
+  }

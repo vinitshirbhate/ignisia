@@ -1,0 +1,11 @@
+{
+    "external_factors": {
+      "competitor_price": 1300000,
+      "market_condition": "competitive",
+      "material_trend": "increasing",
+      "demand_level": "high"
+    },
+    "constraints": {
+      "min_margin_percent": 15
+    }
+  }

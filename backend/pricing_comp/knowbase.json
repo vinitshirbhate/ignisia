@@ -1,0 +1,115 @@
+{
+    "past_projects": [
+      {
+        "project_id": "P001",
+        "type": "Classroom Interior",
+        "client": "ABC University",
+        "area_sqft": 15000,
+        "estimated_cost": 18000000,
+        "actual_cost": 20000000,
+        "promised_days": 90,
+        "actual_days": 105,
+        "profit_margin_percent": 18,
+        "design_complexity": "Medium",
+        "execution_difficulty_score": 0.6
+      },
+      {
+        "project_id": "P002",
+        "type": "Auditorium Interior",
+        "client": "XYZ College",
+        "area_sqft": 12000,
+        "estimated_cost": 25000000,
+        "actual_cost": 29000000,
+        "promised_days": 120,
+        "actual_days": 145,
+        "profit_margin_percent": 12,
+        "design_complexity": "High",
+        "execution_difficulty_score": 0.85
+      },
+      {
+        "project_id": "P003",
+        "type": "Office Interior",
+        "client": "Tech Park Pvt Ltd",
+        "area_sqft": 10000,
+        "estimated_cost": 14000000,
+        "actual_cost": 15000000,
+        "promised_days": 75,
+        "actual_days": 80,
+        "profit_margin_percent": 22,
+        "design_complexity": "Low",
+        "execution_difficulty_score": 0.4
+      }
+    ],
+  
+    "vendor_history": [
+      {
+        "vendor_id": "V001",
+        "name": "ABC Plywood Supplier",
+        "category": "Wood",
+        "cost_index": 0.9,
+        "reliability_score": 0.7,
+        "avg_delay_days": 5,
+        "past_issues": ["Delayed delivery twice"]
+      },
+      {
+        "vendor_id": "V002",
+        "name": "BrightLight Solutions",
+        "category": "Lighting",
+        "cost_index": 1.1,
+        "reliability_score": 0.98,
+        "avg_delay_days": 0,
+        "past_issues": []
+      },
+      {
+        "vendor_id": "V003",
+        "name": "AcousticPro Panels",
+        "category": "Acoustic",
+        "cost_index": 1.0,
+        "reliability_score": 0.85,
+        "avg_delay_days": 2,
+        "past_issues": ["Minor quality variation"]
+      }
+    ],
+  
+    "workforce": {
+      "designers_available": 6,
+      "project_managers": 2,
+      "contractors_available": 12,
+      "ongoing_projects": 2,
+      "max_parallel_capacity": 3,
+      "current_utilization_percent": 75
+    },
+  
+    "material_pricing": [
+      {
+        "material": "Plywood",
+        "price_per_sqft": 85,
+        "historical_avg": 80,
+        "volatility": 0.12
+      },
+      {
+        "material": "Laminate",
+        "price_per_sqft": 120,
+        "historical_avg": 110,
+        "volatility": 0.1
+      },
+      {
+        "material": "Acoustic Panels",
+        "price_per_sqft": 250,
+        "historical_avg": 230,
+        "volatility": 0.15
+      },
+      {
+        "material": "Modular Furniture",
+        "price_per_sqft": 1800,
+        "historical_avg": 1700,
+        "volatility": 0.08
+      }
+    ],
+  
+    "pricing_benchmarks": {
+      "classroom_interior_cost_per_sqft": 1600,
+      "auditorium_interior_cost_per_sqft": 2200,
+      "office_interior_cost_per_sqft": 1400
+    }
+  }

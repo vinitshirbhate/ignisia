@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+import json
+from pathlib import Path
 from typing import List, Literal
 
-from fastapi import FastAPI
-from pydantic import BaseModel, Field
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, ConfigDict, Field
 
 from pricing_comp.pricing_engine import PricingEngine
+from reason.strategic_advisor import StrategicAdvisor, load_sample_inputs
 
 
 DemandLevel = Literal["low", "medium", "high"]
@@ -37,11 +40,46 @@ class ScenarioRequest(PricingRequest):
     margin_offsets: List[float] = Field(default_factory=lambda: [-0.05, 0.0, 0.05])
 
 
+_BACKEND_ROOT = Path(__file__).resolve().parent
+
+
+def _strategy_request_openapi_example() -> dict:
+    """Same shape as POST body: proposal breakdown + external_factors/constraints."""
+    with open(_BACKEND_ROOT / "reason" / "proposal.json", encoding="utf-8") as f:
+        proposal = json.load(f)
+    with open(_BACKEND_ROOT / "reason" / "external.json", encoding="utf-8") as f:
+        external = json.load(f)
+    return {"proposal": proposal, "external": external}
+
+
+class StrategyRequest(BaseModel):
+    """
+    Client sends two JSON objects:
+
+    * ``proposal`` — cost breakdown (materials, labor, summary_totals, contingency, grand_total).
+    * ``external`` — ``external_factors`` (e.g. competitor_price) and ``constraints`` (e.g. min_margin_percent).
+    """
+
+    model_config = ConfigDict(json_schema_extra={"examples": [_strategy_request_openapi_example()]})
+
+    proposal: dict = Field(
+        ...,
+        description="Project cost JSON: project_summary, material_costs, labor_costs, summary_totals, contingency, grand_total.",
+    )
+    external: dict = Field(
+        ...,
+        description="Market JSON: external_factors (competitor_price, market_condition, …), constraints (min_margin_percent).",
+    )
+
+
 app = FastAPI(
     title="Pricing Engine API",
     description="Intelligent pricing API for AI-powered RFP bidding.",
     version="1.0.0",
 )
+
+# Last successful POST /reason/strategy (so Swagger/Postman/UI can share one result).
+_latest_strategy: dict | None = None
 
 
 @app.get("/health")
@@ -73,6 +111,37 @@ def _build_engine(payload: PricingRequest) -> PricingEngine:
 async def recommend_price(payload: PricingRequest) -> dict:
     engine = _build_engine(payload)
     return await engine.compute_final_price_with_ai()
+
+
+@app.post("/reason/strategy")
+async def reason_strategy(payload: StrategyRequest) -> dict:
+    """
+    Strategic bid advice. Body must be ``{ "proposal": <cost JSON>, "external": <market JSON> }``
+    (same structures as ``reason/proposal.json`` and ``reason/external.json``).
+    """
+    global _latest_strategy
+    advisor = StrategicAdvisor()
+    result = await advisor.generate_strategy(payload.proposal, payload.external)
+    _latest_strategy = result
+    return result
+
+
+@app.get("/reason/strategy/latest")
+async def reason_strategy_latest() -> dict:
+    """Return the result of the most recent successful POST /reason/strategy (e.g. for the UI after Swagger)."""
+    if _latest_strategy is None:
+        raise HTTPException(
+            status_code=404,
+            detail="No strategy computed yet. Call POST /reason/strategy first, then refresh the UI.",
+        )
+    return _latest_strategy
+
+
+@app.get("/reason/strategy/sample")
+async def reason_strategy_sample() -> dict:
+    proposal, external = load_sample_inputs()
+    advisor = StrategicAdvisor()
+    return await advisor.generate_strategy(proposal, external)
 
 
 @app.post("/pricing/simulate")

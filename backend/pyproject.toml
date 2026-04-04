@@ -22,7 +22,10 @@ dependencies = [
 ]
 
 [tool.setuptools]
-packages = ["pricing_comp", "rfp_parser"]
+packages = ["pricing_comp", "rfp_parser", "reason"]
+
+[tool.setuptools.package-data]
+reason = ["*.json"]
 
 [tool.uv.workspace]
 members = [
