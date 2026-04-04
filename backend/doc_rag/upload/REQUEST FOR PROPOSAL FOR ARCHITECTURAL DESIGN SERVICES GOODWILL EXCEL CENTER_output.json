@@ -1,0 +1,198 @@
+{
+  "analysis": {
+    "rfp_name": "REQUEST FOR PROPOSAL FOR ARCHITECTURAL DESIGN SERVICES GOODWILL EXCEL CENTER",
+    "questions": [
+      {
+        "question": "What is your proposed project schedule, including key milestones and completion dates?",
+        "category": "general",
+        "intent": "information_request"
+      },
+      {
+        "question": "Can you provide a detailed breakdown of your firm fixed price per rentable square foot fee structure?",
+        "category": "pricing",
+        "intent": "information_request"
+      },
+      {
+        "question": "What are the specific LEED requirements your firm plans to implement for this project?",
+        "category": "technical",
+        "intent": "capability_check"
+      },
+      {
+        "question": "How will your team coordinate with owner-selected vendors for IT infrastructure and other components?",
+        "category": "technical",
+        "intent": "capability_check"
+      },
+      {
+        "question": "What measures will you take to ensure compliance with local building codes and regulations?",
+        "category": "compliance",
+        "intent": "compliance_check"
+      },
+      {
+        "question": "Can you describe your process for verifying classroom location, functionality, and size?",
+        "category": "technical",
+        "intent": "information_request"
+      },
+      {
+        "question": "What is your approach to handling project budget updates throughout the design process?",
+        "category": "pricing",
+        "intent": "information_request"
+      },
+      {
+        "question": "How will your firm ensure the quality and quantity of work during construction administration?",
+        "category": "technical",
+        "intent": "capability_check"
+      },
+      {
+        "question": "What is your firm's experience with similar projects and what were the outcomes?",
+        "category": "general",
+        "intent": "capability_check"
+      },
+      {
+        "question": "How do you plan to manage communication and project updates between stakeholders?",
+        "category": "general",
+        "intent": "information_request"
+      },
+      {
+        "question": "Can you provide examples of how your designs have supported the goals of similar educational facilities?",
+        "category": "technical",
+        "intent": "capability_check"
+      },
+      {
+        "question": "What strategies do you have in place for managing changes or requests during construction?",
+        "category": "general",
+        "intent": "strategy"
+      },
+      {
+        "question": "What is your timeline for obtaining necessary permits and how do you plan to handle any potential delays?",
+        "category": "compliance",
+        "intent": "strategy"
+      },
+      {
+        "question": "What factors will you consider in the space planning and design phases to meet GEC's objectives?",
+        "category": "technical",
+        "intent": "capability_check"
+      },
+      {
+        "question": "How will you ensure compliance with ADA requirements in your design?",
+        "category": "compliance",
+        "intent": "compliance_check"
+      }
+    ]
+  },
+  "pricing_payload": {
+    "rfp_items": [
+      {
+        "name": "Architectural Design Services",
+        "quantity": 26500,
+        "unit": "sqft"
+      },
+      {
+        "name": "Construction Documentation",
+        "quantity": 1,
+        "unit": "pieces"
+      },
+      {
+        "name": "Permit Coordination",
+        "quantity": 1,
+        "unit": "pieces"
+      },
+      {
+        "name": "Furniture Design",
+        "quantity": 1,
+        "unit": "pieces"
+      },
+      {
+        "name": "MEP Design",
+        "quantity": 1,
+        "unit": "pieces"
+      }
+    ],
+    "region": "Washington, DC",
+    "state": "District of Columbia",
+    "project_type": "government",
+    "area_sqft": 26500,
+    "duration_weeks": 26,
+    "is_government_project": true
+  },
+  "pricing_result": {
+    "proposal": {
+      "project_summary": {
+        "region": "Washington, DC",
+        "state": "District of Columbia",
+        "project_type": "government",
+        "area_sqft": 26500,
+        "duration_weeks": 26
+      },
+      "material_costs": {
+        "items": [
+          {
+            "item": "Architectural Design Services",
+            "quantity": 26500,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          },
+          {
+            "item": "Construction Documentation",
+            "quantity": 1,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          },
+          {
+            "item": "Permit Coordination",
+            "quantity": 1,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          },
+          {
+            "item": "Furniture Design",
+            "quantity": 1,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          },
+          {
+            "item": "MEP Design",
+            "quantity": 1,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          }
+        ],
+        "subtotal_ex_gst": 0,
+        "total_gst": 0,
+        "grand_total_incl_gst": 0
+      },
+      "labor_costs": {
+        "total_labor_cost": 53707184,
+        "labor_cost_per_sqft": 2027
+      },
+      "import_costs": {
+        "none": "No imported items..."
+      },
+      "summary_totals": {
+        "total_materials_with_gst": 0,
+        "total_labor": 53707184,
+        "total_project_cost": 53707184
+      },
+      "contingency": {
+        "percentage": 5,
+        "amount": 2685359.2
+      },
+      "grand_total": 56392543.2
+    },
+    "external": {
+      "external_factors": {
+        "competitor_price": 0,
+        "market_condition": "Unknown",
+        "material_trend": "Unknown",
+        "demand_level": "Unknown"
+      },
+      "constraints": {
+        "min_margin_percent": 15
+      }
+    }
+  }
+}

@@ -7,19 +7,44 @@ from pathlib import Path
 from fastapi import FastAPI, UploadFile, File, HTTPException
 import uvicorn
 
+def _apply_env_file(path: Path, *, override: bool) -> None:
+    if not path.exists():
+        return
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.split("=", 1)
+        key = k.strip()
+        val = v.strip().strip('"').strip("'")
+        if override:
+            os.environ[key] = val
+        else:
+            os.environ.setdefault(key, val)
+
+
 def load_env():
-    env = Path(__file__).with_name(".env")
-    if env.exists():
-        for line in env.read_text(encoding="utf-8").splitlines():
-            if "=" in line and not line.strip().startswith("#"):
-                k, v = line.split("=", 1)
-                os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+    # Shared backend keys (same as ignisia/backend/.env used by main FastAPI)
+    backend_root = Path(__file__).resolve().parent.parent
+    _apply_env_file(backend_root / ".env", override=False)
+    # Optional overrides for doc_rag only
+    _apply_env_file(Path(__file__).with_name(".env"), override=True)
     if "OPENROUTER_API_KEY" not in os.environ and "api_key" in os.environ:
-        os.environ["OPENROUTER_API_KEY"] = os.environ["api_key"]
+        os.environ.setdefault("OPENROUTER_API_KEY", os.environ["api_key"])
 
 load_env()
 
 app = FastAPI(title="RFP Single-Pass Analyzer")
+
+
+@app.on_event("startup")
+def _check_openrouter_key() -> None:
+    if not os.environ.get("OPENROUTER_API_KEY"):
+        import logging
+
+        logging.getLogger("uvicorn.error").warning(
+            "OPENROUTER_API_KEY is not set. Add it to ignisia/backend/.env or doc_rag/.env, then restart."
+        )
 UPLOAD_DIR = Path(__file__).parent / "upload"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -141,12 +166,14 @@ Return STRICTLY valid JSON. Do not hallucinate items not present in the RFP. If 
     return json.loads(content.strip())
 
 def call_pricing_agent(payload: dict) -> dict:
+    base = os.environ.get("PRICING_AGENT_URL", "http://127.0.0.1:9000").rstrip("/")
+    url = f"{base}/api/v1/price_rfp"
     try:
-        r = requests.post("http://localhost:9000/api/v1/price_rfp", json=payload, timeout=300)
+        r = requests.post(url, json=payload, timeout=300)
         r.raise_for_status()
         return r.json()
     except Exception as e:
-        return {"error": str(e), "details": "Failed to call pricing agent on port 9000"}
+        return {"error": str(e), "details": f"Failed to call pricing agent at {url}"}
 
 @app.post("/analyze-rfp")
 async def analyze_rfp(file: UploadFile = File(...)):
