@@ -5,11 +5,25 @@ from fastapi import FastAPI
 from fastapi import HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
+from pymongo import MongoClient
+import os
+import datetime
+from dotenv import load_dotenv
+load_dotenv()
 
 from node_pdf_bridge import render_pdf_via_node
 from rag_service import answer_question
 from rfp_pdf_mapper import build_proposal_request_from_rfp_ai
 from schemas import ProposalRequest, RagQueryRequest, RagQueryResponse, sample_proposal
+
+MONGO_URI = os.environ.get("MONGO_URI", "mongodb://localhost:27017/")
+try:
+    mongo_client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=2000)
+    db = mongo_client["ignisia"]
+    proposals_collection = db["proposals"]
+except Exception as e:
+    print(f"Failed to initialize MongoDB client: {e}")
+    proposals_collection = None
 
 
 app = FastAPI(
@@ -37,6 +51,16 @@ class RfpCombinedPdfBody(BaseModel):
 @app.post("/api/proposals/pdf-from-rfp")
 def generate_rfp_combined_pdf(body: RfpCombinedPdfBody) -> StreamingResponse:
     """Build a proposal PDF from last RFP analyze JSON + AI strategy JSON."""
+    if proposals_collection is not None:
+        try:
+            proposals_collection.insert_one({
+                "ai_proposal": body.ai_proposal,
+                "ai_reason": body.ai_reason,
+                "created_at": datetime.datetime.utcnow()
+            })
+        except Exception as e:
+            print(f"Failed to store proposal to MongoDB: {e}")
+
     try:
         payload = build_proposal_request_from_rfp_ai(body.ai_proposal, body.ai_reason)
         pdf_bytes = render_pdf_via_node(payload)

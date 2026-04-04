@@ -7,7 +7,7 @@ function pdfApiBase(): string {
   return (
     process.env.PDF_PROPOSAL_API_URL?.replace(/\/$/, "") ||
     process.env.NEXT_PUBLIC_PDF_PROPOSAL_API_URL?.replace(/\/$/, "") ||
-    "http://127.0.0.1:8100"
+    "http://localhost:8100"
   )
 }
 

@@ -3,72 +3,77 @@
     "rfp_name": "Erwin Center Park Pool & Bathhouse",
     "questions": [
       {
-        "question": "What is your proposed timeline for completing the design and construction phases of the project?",
-        "category": "general",
-        "intent": "strategy"
+        "question": "Can you provide a detailed breakdown of your proposed elements and features for the swimming pool and bathhouse design?",
+        "category": "technical",
+        "intent": "capability_check"
       },
       {
-        "question": "How do you plan to manage costs to ensure the project stays within the $1.3 million budget?",
+        "question": "What is your proposed budget for the design and construction services, and how do you plan to accommodate changes if the budget constraints affect project features?",
         "category": "pricing",
         "intent": "strategy"
       },
       {
-        "question": "Can you provide details on how your team will ensure compliance with ADA standards throughout the project?",
-        "category": "compliance",
-        "intent": "compliance_check"
-      },
-      {
-        "question": "What specific architectural and construction services will your team provide as part of the design-build process?",
-        "category": "technical",
-        "intent": "capability_check"
-      },
-      {
-        "question": "What experience does your team have with design-build projects similar to this one?",
-        "category": "technical",
-        "intent": "capability_check"
-      },
-      {
-        "question": "What strategies will you implement to ensure effective communication with City staff and the Task Force?",
+        "question": "What is your timeline for the kickoff scoping meeting, design reviews, and construction phases?",
         "category": "general",
         "intent": "information_request"
       },
       {
-        "question": "How will you address potential changes in the project scope that may arise during the design or construction phases?",
-        "category": "technical",
-        "intent": "strategy"
-      },
-      {
-        "question": "What is your plan for obtaining necessary permits and ensuring compliance with local building codes?",
+        "question": "How do you ensure compliance with ADA standards and local building codes during construction?",
         "category": "compliance",
         "intent": "compliance_check"
       },
       {
-        "question": "Can you describe your approach to waste management and sustainability during construction?",
-        "category": "technical",
+        "question": "What strategies will you employ to manage and control the project budget effectively?",
+        "category": "pricing",
         "intent": "strategy"
       },
       {
-        "question": "What measures will you take to minimize noise and dust during construction?",
-        "category": "technical",
-        "intent": "strategy"
-      },
-      {
-        "question": "How will you ensure that the substantial completion criteria will be met before final inspection?",
-        "category": "compliance",
-        "intent": "compliance_check"
-      },
-      {
-        "question": "What is your proposed methodology for managing project risks and ensuring timely completion?",
-        "category": "general",
-        "intent": "strategy"
-      },
-      {
-        "question": "Could you provide examples of previous projects where you successfully managed a public engagement component?",
+        "question": "How will you address and integrate community needs and feedback in your design proposal?",
         "category": "technical",
         "intent": "capability_check"
       },
       {
-        "question": "What specific submittals do you plan to provide during the design and construction phases?",
+        "question": "Can you provide samples of similar projects you've completed that align with the requirements of this RFP?",
+        "category": "technical",
+        "intent": "capability_check"
+      },
+      {
+        "question": "What measures will you take to minimize environmental impacts during the construction process?",
+        "category": "compliance",
+        "intent": "compliance_check"
+      },
+      {
+        "question": "How will progress payments be structured and tied to the completion of specific project milestones?",
+        "category": "pricing",
+        "intent": "information_request"
+      },
+      {
+        "question": "Who will be your designated Project Superintendent, and how will you ensure effective communication throughout the project?",
+        "category": "general",
+        "intent": "information_request"
+      },
+      {
+        "question": "What quality control measures will you implement to ensure project deliverables meet the required standards?",
+        "category": "compliance",
+        "intent": "compliance_check"
+      },
+      {
+        "question": "Can you outline your approach to managing the construction schedule and handling any potential delays?",
+        "category": "general",
+        "intent": "strategy"
+      },
+      {
+        "question": "What is your plan for obtaining and managing the necessary building permits and approvals?",
+        "category": "compliance",
+        "intent": "compliance_check"
+      },
+      {
+        "question": "How do you plan to ensure that all subcontractors meet the necessary qualifications and compliance standards?",
+        "category": "compliance",
+        "intent": "compliance_check"
+      },
+      {
+        "question": "What types of materials will you propose for the project, and can you provide a rationale for their selection?",
         "category": "technical",
         "intent": "information_request"
       }
@@ -82,56 +87,46 @@
         "unit": "sqft"
       },
       {
-        "name": "Renovation of Bathhouse",
+        "name": "Bathhouse Renovation",
         "quantity": 2250,
         "unit": "sqft"
       },
       {
-        "name": "Geysers and Water Features",
+        "name": "Geysers",
         "quantity": 1,
+        "unit": "pieces"
+      },
+      {
+        "name": "Buckets",
+        "quantity": 1,
+        "unit": "pieces"
+      },
+      {
+        "name": "Rainfalls",
+        "quantity": 3,
         "unit": "pieces"
       },
       {
         "name": "Double-loop Slide",
         "quantity": 1,
         "unit": "pieces"
-      },
-      {
-        "name": "Electrical Services",
-        "quantity": 1,
-        "unit": "set"
-      },
-      {
-        "name": "Plumbing Systems",
-        "quantity": 1,
-        "unit": "set"
-      },
-      {
-        "name": "Safety Equipment",
-        "quantity": 1,
-        "unit": "set"
-      },
-      {
-        "name": "Fencing and Gates",
-        "quantity": 1,
-        "unit": "set"
       }
     ],
-    "region": "North Carolina",
-    "state": "North Carolina",
+    "region": "Maharashtra",
+    "state": "Maharashtra",
     "project_type": "government",
     "area_sqft": 10011,
-    "duration_weeks": 20,
+    "duration_weeks": 16,
     "is_government_project": true
   },
   "pricing_result": {
     "proposal": {
       "project_summary": {
-        "region": "North Carolina",
-        "state": "North Carolina",
+        "region": "Maharashtra",
+        "state": "Maharashtra",
         "project_type": "government",
         "area_sqft": 10011,
-        "duration_weeks": 20
+        "duration_weeks": 16
       },
       "material_costs": {
         "items": [
@@ -143,15 +138,29 @@
             "total_incl_gst": 0
           },
           {
-            "item": "Renovation of Bathhouse",
+            "item": "Bathhouse Renovation",
             "quantity": 2250,
             "unit_price_ex_gst": 0,
             "gst": 0,
             "total_incl_gst": 0
           },
           {
-            "item": "Geysers and Water Features",
+            "item": "Geysers",
             "quantity": 1,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          },
+          {
+            "item": "Buckets",
+            "quantity": 1,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          },
+          {
+            "item": "Rainfalls",
+            "quantity": 3,
             "unit_price_ex_gst": 0,
             "gst": 0,
             "total_incl_gst": 0
@@ -160,66 +169,38 @@
             "item": "Double-loop Slide",
             "quantity": 1,
             "unit_price_ex_gst": 350000,
-            "gst": 0,
-            "total_incl_gst": 0
-          },
-          {
-            "item": "Electrical Services",
-            "quantity": 1,
-            "unit_price_ex_gst": 0,
-            "gst": 0,
-            "total_incl_gst": 0
-          },
-          {
-            "item": "Plumbing Systems",
-            "quantity": 1,
-            "unit_price_ex_gst": 0,
-            "gst": 0,
-            "total_incl_gst": 0
-          },
-          {
-            "item": "Safety Equipment",
-            "quantity": 1,
-            "unit_price_ex_gst": 0,
-            "gst": 0,
-            "total_incl_gst": 0
-          },
-          {
-            "item": "Fencing and Gates",
-            "quantity": 1,
-            "unit_price_ex_gst": 0,
-            "gst": 0,
-            "total_incl_gst": 0
+            "gst": 63000,
+            "total_incl_gst": 413000
           }
         ],
         "subtotal_ex_gst": 350000,
-        "total_gst": 0,
-        "grand_total_incl_gst": 350000
+        "total_gst": 63000,
+        "grand_total_incl_gst": 413000
       },
       "labor_costs": {
-        "total_labor_cost": 27053342,
-        "labor_cost_per_sqft": 2702
+        "total_labor_cost": 23406566,
+        "labor_cost_per_sqft": 2338
       },
       "import_costs": {
-        "none": "No imported items except for the Double-loop Slide."
+        "none": "No imported items..."
       },
       "summary_totals": {
-        "total_materials_with_gst": 350000,
-        "total_labor": 27053342,
-        "total_project_cost": 27303342
+        "total_materials_with_gst": 413000,
+        "total_labor": 23406566,
+        "total_project_cost": 23819666
       },
       "contingency": {
         "percentage": 5,
-        "amount": 1365167.1
+        "amount": 1190983.3
       },
-      "grand_total": 28668509.1
+      "grand_total": 25010649.3
     },
     "external": {
       "external_factors": {
         "competitor_price": 0,
-        "market_condition": "stable",
-        "material_trend": "mixed",
-        "demand_level": "moderate"
+        "market_condition": "Stable",
+        "material_trend": "Increased demand for construction materials",
+        "demand_level": "High"
       },
       "constraints": {
         "min_margin_percent": 15
