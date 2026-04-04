@@ -11,6 +11,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import uvicorn
+from dotenv import load_dotenv
+load_dotenv()
 
 # ─── ENV LOADER ───────────────────────────────────────────────────────────────
 def load_env():

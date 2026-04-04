@@ -55,7 +55,7 @@ export function Header() {
             Product
           </Link>
           <Link
-            href="#ai-validate"
+            href="ai_validate"
             className="text-sm font-bold text-black border-b-2 border-transparent transition-colors hover:border-black"
           >
             AI Validate
