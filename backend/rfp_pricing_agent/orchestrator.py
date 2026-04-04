@@ -73,7 +73,7 @@ You have access to 4 specialized live data tools:
 - ALWAYS call tools in PARALLEL, never sequentially
 - Use batch tools (get_multiple_material_prices, calculate_gst_on_quote) over individual calls
 - For imported/premium items, ALWAYS calculate import costs
-- Include GST on every line item
+- Include GST on every line item. If the GST evaluates to 0 or is unknown, default to 18% and compute the 18% amount.
 - Add 3-5% contingency on total
 - Output a structured JSON cost breakdown
 
