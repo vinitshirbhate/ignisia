@@ -1,0 +1,229 @@
+{
+  "analysis": {
+    "rfp_name": "Erwin Center Park Pool & Bathhouse",
+    "questions": [
+      {
+        "question": "What is your proposed timeline for completing the design and construction phases of the project?",
+        "category": "general",
+        "intent": "strategy"
+      },
+      {
+        "question": "How do you plan to manage costs to ensure the project stays within the $1.3 million budget?",
+        "category": "pricing",
+        "intent": "strategy"
+      },
+      {
+        "question": "Can you provide details on how your team will ensure compliance with ADA standards throughout the project?",
+        "category": "compliance",
+        "intent": "compliance_check"
+      },
+      {
+        "question": "What specific architectural and construction services will your team provide as part of the design-build process?",
+        "category": "technical",
+        "intent": "capability_check"
+      },
+      {
+        "question": "What experience does your team have with design-build projects similar to this one?",
+        "category": "technical",
+        "intent": "capability_check"
+      },
+      {
+        "question": "What strategies will you implement to ensure effective communication with City staff and the Task Force?",
+        "category": "general",
+        "intent": "information_request"
+      },
+      {
+        "question": "How will you address potential changes in the project scope that may arise during the design or construction phases?",
+        "category": "technical",
+        "intent": "strategy"
+      },
+      {
+        "question": "What is your plan for obtaining necessary permits and ensuring compliance with local building codes?",
+        "category": "compliance",
+        "intent": "compliance_check"
+      },
+      {
+        "question": "Can you describe your approach to waste management and sustainability during construction?",
+        "category": "technical",
+        "intent": "strategy"
+      },
+      {
+        "question": "What measures will you take to minimize noise and dust during construction?",
+        "category": "technical",
+        "intent": "strategy"
+      },
+      {
+        "question": "How will you ensure that the substantial completion criteria will be met before final inspection?",
+        "category": "compliance",
+        "intent": "compliance_check"
+      },
+      {
+        "question": "What is your proposed methodology for managing project risks and ensuring timely completion?",
+        "category": "general",
+        "intent": "strategy"
+      },
+      {
+        "question": "Could you provide examples of previous projects where you successfully managed a public engagement component?",
+        "category": "technical",
+        "intent": "capability_check"
+      },
+      {
+        "question": "What specific submittals do you plan to provide during the design and construction phases?",
+        "category": "technical",
+        "intent": "information_request"
+      }
+    ]
+  },
+  "pricing_payload": {
+    "rfp_items": [
+      {
+        "name": "Swimming Pool Decking",
+        "quantity": 7761,
+        "unit": "sqft"
+      },
+      {
+        "name": "Renovation of Bathhouse",
+        "quantity": 2250,
+        "unit": "sqft"
+      },
+      {
+        "name": "Geysers and Water Features",
+        "quantity": 1,
+        "unit": "pieces"
+      },
+      {
+        "name": "Double-loop Slide",
+        "quantity": 1,
+        "unit": "pieces"
+      },
+      {
+        "name": "Electrical Services",
+        "quantity": 1,
+        "unit": "set"
+      },
+      {
+        "name": "Plumbing Systems",
+        "quantity": 1,
+        "unit": "set"
+      },
+      {
+        "name": "Safety Equipment",
+        "quantity": 1,
+        "unit": "set"
+      },
+      {
+        "name": "Fencing and Gates",
+        "quantity": 1,
+        "unit": "set"
+      }
+    ],
+    "region": "North Carolina",
+    "state": "North Carolina",
+    "project_type": "government",
+    "area_sqft": 10011,
+    "duration_weeks": 20,
+    "is_government_project": true
+  },
+  "pricing_result": {
+    "proposal": {
+      "project_summary": {
+        "region": "North Carolina",
+        "state": "North Carolina",
+        "project_type": "government",
+        "area_sqft": 10011,
+        "duration_weeks": 20
+      },
+      "material_costs": {
+        "items": [
+          {
+            "item": "Swimming Pool Decking",
+            "quantity": 7761,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          },
+          {
+            "item": "Renovation of Bathhouse",
+            "quantity": 2250,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          },
+          {
+            "item": "Geysers and Water Features",
+            "quantity": 1,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          },
+          {
+            "item": "Double-loop Slide",
+            "quantity": 1,
+            "unit_price_ex_gst": 350000,
+            "gst": 0,
+            "total_incl_gst": 0
+          },
+          {
+            "item": "Electrical Services",
+            "quantity": 1,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          },
+          {
+            "item": "Plumbing Systems",
+            "quantity": 1,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          },
+          {
+            "item": "Safety Equipment",
+            "quantity": 1,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          },
+          {
+            "item": "Fencing and Gates",
+            "quantity": 1,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          }
+        ],
+        "subtotal_ex_gst": 350000,
+        "total_gst": 0,
+        "grand_total_incl_gst": 350000
+      },
+      "labor_costs": {
+        "total_labor_cost": 27053342,
+        "labor_cost_per_sqft": 2702
+      },
+      "import_costs": {
+        "none": "No imported items except for the Double-loop Slide."
+      },
+      "summary_totals": {
+        "total_materials_with_gst": 350000,
+        "total_labor": 27053342,
+        "total_project_cost": 27303342
+      },
+      "contingency": {
+        "percentage": 5,
+        "amount": 1365167.1
+      },
+      "grand_total": 28668509.1
+    },
+    "external": {
+      "external_factors": {
+        "competitor_price": 0,
+        "market_condition": "stable",
+        "material_trend": "mixed",
+        "demand_level": "moderate"
+      },
+      "constraints": {
+        "min_margin_percent": 15
+      }
+    }
+  }
+}

@@ -78,15 +78,29 @@ You have access to 4 specialized live data tools:
 - Output a structured JSON cost breakdown
 
 ## Output Format:
-Always return a valid JSON with:
-- project_summary
-- material_costs (with GST)
-- labor_costs
-- import_costs (if applicable)
-- summary_totals
-- cost_per_sqft
-- contingency
-- grand_total
+Always return STRICTLY valid JSON ONLY (no math expressions like "10+20", you must compute the final number). Use the exact following JSON structure:
+{
+  "proposal": {
+    "project_summary": { "region": "...", "state": "...", "project_type": "...", "area_sqft": 0, "duration_weeks": 0 },
+    "material_costs": {
+      "items": [
+        { "item": "...", "quantity": 0, "unit_price_ex_gst": 0, "gst": 0, "total_incl_gst": 0 }
+      ],
+      "subtotal_ex_gst": 0,
+      "total_gst": 0,
+      "grand_total_incl_gst": 0
+    },
+    "labor_costs": { "total_labor_cost": 0, "labor_cost_per_sqft": 0 },
+    "import_costs": { "none": "No imported items..." },
+    "summary_totals": { "total_materials_with_gst": 0, "total_labor": 0, "total_project_cost": 0 },
+    "contingency": { "percentage": 5, "amount": 0 },
+    "grand_total": 0
+  },
+  "external": {
+    "external_factors": { "competitor_price": 0, "market_condition": "...", "material_trend": "...", "demand_level": "..." },
+    "constraints": { "min_margin_percent": 15 }
+  }
+}
 """
 
 
