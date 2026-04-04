@@ -1,0 +1,135 @@
+{
+  "analysis": {
+    "rfp_name": "Model Request For Proposal for Agreement for Procurement of Power",
+    "questions": [
+      {
+        "question": "What is the capacity required for the electricity procurement?",
+        "category": "general",
+        "intent": "information_request"
+      },
+      {
+        "question": "What is the timeline for supply commencement after the submission of the bid?",
+        "category": "general",
+        "intent": "information_request"
+      },
+      {
+        "question": "What are the financial requirements for the Bid Security?",
+        "category": "pricing",
+        "intent": "information_request"
+      },
+      {
+        "question": "What are the terms and conditions specified in the draft Agreement for Procurement of Power?",
+        "category": "compliance",
+        "intent": "information_request"
+      },
+      {
+        "question": "What is the validity period of the bids submitted?",
+        "category": "general",
+        "intent": "information_request"
+      },
+      {
+        "question": "How will the bids be evaluated and what are the parameters for selection of the bidder?",
+        "category": "scope of work",
+        "intent": "strategy"
+      },
+      {
+        "question": "What risks or liabilities will the selected bidder assume during the project?",
+        "category": "compliance",
+        "intent": "information_request"
+      },
+      {
+        "question": "What penalties might be applied in the event of a breach of the Agreement for Procurement of Power?",
+        "category": "compliance",
+        "intent": "information_request"
+      },
+      {
+        "question": "Are there any restrictions on the bidding process due to ownership changes or control?",
+        "category": "compliance",
+        "intent": "compliance_check"
+      },
+      {
+        "question": "What are the conditions under which bids can be modified or withdrawn?",
+        "category": "general",
+        "intent": "information_request"
+      },
+      {
+        "question": "What is the structure of the tariff that needs to be quoted in the bids?",
+        "category": "pricing",
+        "intent": "information_request"
+      },
+      {
+        "question": "Can you provide details about the pre-bid conference and the process for submitting inquiries?",
+        "category": "general",
+        "intent": "information_request"
+      }
+    ]
+  },
+  "pricing_payload": {
+    "rfp_items": [
+      {
+        "name": "Bid Security",
+        "quantity": 5,
+        "unit": "lakhs per MW"
+      }
+    ],
+    "region": "Mumbai",
+    "state": "Maharashtra",
+    "project_type": "government",
+    "area_sqft": 0,
+    "duration_weeks": 0,
+    "is_government_project": true
+  },
+  "pricing_result": {
+    "proposal": {
+      "project_summary": {
+        "region": "Mumbai",
+        "state": "Maharashtra",
+        "project_type": "government",
+        "area_sqft": 0,
+        "duration_weeks": 0
+      },
+      "material_costs": {
+        "items": [
+          {
+            "item": "Bid Security",
+            "quantity": 5,
+            "unit_price_ex_gst": 0,
+            "gst": 0,
+            "total_incl_gst": 0
+          }
+        ],
+        "subtotal_ex_gst": 0,
+        "total_gst": 0,
+        "grand_total_incl_gst": 0
+      },
+      "labor_costs": {
+        "total_labor_cost": 0,
+        "labor_cost_per_sqft": 0
+      },
+      "import_costs": {
+        "none": "No imported items..."
+      },
+      "summary_totals": {
+        "total_materials_with_gst": 0,
+        "total_labor": 0,
+        "total_project_cost": 0
+      },
+      "contingency": {
+        "percentage": 5,
+        "amount": 0
+      },
+      "grand_total": 0
+    },
+    "external": {
+      "external_factors": {
+        "competitor_price": 0,
+        "market_condition": "N/A",
+        "material_trend": "N/A",
+        "demand_level": "N/A"
+      },
+      "constraints": {
+        "min_margin_percent": 15
+      }
+    }
+  }
+}

@@ -11,7 +11,9 @@ import {
   TrendingUp,
   AlertTriangle,
   RefreshCw,
+  FileDown,
 } from "lucide-react"
+import { RFP_ANALYZE_STORAGE_KEY } from "@/lib/rfpTypes"
 
 type StrategyResponse = {
   strategy: string
@@ -60,6 +62,8 @@ export function AIReasonContent() {
   const [formExternal, setFormExternal] = useState("")
   const [formBusy, setFormBusy] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
+  const [pdfBusy, setPdfBusy] = useState(false)
+  const [pdfError, setPdfError] = useState<string | null>(null)
 
   const loadFromApi = useCallback(async () => {
     setLoading(true)
@@ -98,6 +102,64 @@ export function AIReasonContent() {
   }, [refreshTick, loadFromApi])
 
   const refresh = () => setRefreshTick((t) => t + 1)
+
+  const generateResponsePdf = async () => {
+    if (!data) return
+    setPdfError(null)
+    setPdfBusy(true)
+    try {
+      const raw = typeof window !== "undefined" ? sessionStorage.getItem(RFP_ANALYZE_STORAGE_KEY) : null
+      if (!raw) {
+        setPdfError("No RFP analyze data in this browser. Run an RFP from the home flow first, then open this page.")
+        return
+      }
+      let ai_proposal: unknown
+      try {
+        ai_proposal = JSON.parse(raw) as unknown
+      } catch {
+        setPdfError("Stored RFP data is not valid JSON. Re-run analyze from the proposal flow.")
+        return
+      }
+      if (!ai_proposal || typeof ai_proposal !== "object") {
+        setPdfError("Stored RFP payload is invalid.")
+        return
+      }
+
+      const res = await fetch("/api/rfp/response-pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ai_proposal, ai_reason: data }),
+      })
+      const ct = res.headers.get("content-type") || ""
+      if (!res.ok) {
+        if (ct.includes("application/json")) {
+          const payload = (await res.json()) as { error?: string; detail?: string; hint?: string }
+          const parts = [payload.error, payload.detail, payload.hint].filter(Boolean)
+          setPdfError(parts.join(" — ") || `Request failed (${res.status})`)
+        } else {
+          setPdfError(`PDF request failed (${res.status})`)
+        }
+        return
+      }
+      const blob = await res.blob()
+      const disp = res.headers.get("content-disposition") || ""
+      const m = /filename\*?=(?:UTF-8'')?["']?([^"';]+)/i.exec(disp)
+      const name = m?.[1]?.trim() || "rfp-response.pdf"
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement("a")
+      a.href = url
+      a.download = name
+      a.rel = "noopener"
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(url)
+    } catch (e) {
+      setPdfError(e instanceof Error ? e.message : "PDF download failed")
+    } finally {
+      setPdfBusy(false)
+    }
+  }
 
   const submitJson = async () => {
     setFormError(null)
@@ -216,15 +278,17 @@ export function AIReasonContent() {
             {resolvedDir ? (
               <p className="break-all text-sm font-mono text-black/60">Path hint: {resolvedDir}</p>
             ) : null}
-            <Button
-              type="button"
-              variant="outline"
-              onClick={refresh}
-              className="border-2 border-black font-black uppercase"
-            >
-              <RefreshCw className="mr-2 h-4 w-4" />
-              Refresh
-            </Button>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={refresh}
+                className="border-2 border-black font-black uppercase"
+              >
+                <RefreshCw className="mr-2 h-4 w-4" />
+                Refresh
+              </Button>
+            </div>
           </CardContent>
         </Card>
         <div className="mx-auto w-full max-w-3xl">{JsonForm}</div>
@@ -247,18 +311,34 @@ export function AIReasonContent() {
               <p className="mt-1 break-all text-[10px] font-mono text-black/50">Files: {resolvedDir}</p>
             ) : null} */}
           </div>
-          <Button
-            type="button"
-            variant="outline"
-            onClick={refresh}
-            className="shrink-0 border-[3px] border-black font-black uppercase shadow-[4px_4px_0_0_#000]"
-          >
-            <RefreshCw className="mr-2 h-4 w-4" />
-            Refresh
-          </Button>
+          <div className="flex shrink-0 flex-wrap items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={refresh}
+              className="border-[3px] border-black font-black uppercase shadow-[4px_4px_0_0_#000]"
+            >
+              <RefreshCw className="mr-2 h-4 w-4" />
+              Refresh
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              disabled={pdfBusy}
+              onClick={() => void generateResponsePdf()}
+              className="border-[3px] border-black font-black uppercase shadow-[4px_4px_0_0_#000]"
+            >
+              <FileDown className="mr-2 h-4 w-4" />
+              {pdfBusy ? "Generating…" : "Generate Response PDF"}
+            </Button>
+          </div>
         </div>
 
-      
+        {pdfError ? (
+          <p className="text-sm font-bold text-red-600" role="alert">
+            {pdfError}
+          </p>
+        ) : null}
 
         <div className="grid gap-8 lg:grid-cols-3">
           <Card className="col-span-1 border-4 border-black shadow-[8px_8px_0_0_#000] lg:col-span-2">
